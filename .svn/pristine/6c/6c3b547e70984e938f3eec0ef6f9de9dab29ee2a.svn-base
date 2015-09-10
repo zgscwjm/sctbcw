@@ -1,0 +1,72 @@
+package com.sctbc.entity;
+
+/**
+ * RolesPrivilege entity. @author MyEclipse Persistence Tools
+ */
+
+public class RolesPrivilege implements java.io.Serializable {
+
+	// Fields
+
+	private RolesPrivilegeId id;
+	private Integer id_1;
+	private String demo1;
+	private String demo2;
+
+	// Constructors
+
+	/** default constructor */
+	public RolesPrivilege() {
+	}
+
+	/** minimal constructor */
+	public RolesPrivilege(RolesPrivilegeId id, Integer id_1, String demo1) {
+		this.id = id;
+		this.id_1 = id_1;
+		this.demo1 = demo1;
+	}
+
+	/** full constructor */
+	public RolesPrivilege(RolesPrivilegeId id, Integer id_1, String demo1,
+			String demo2) {
+		this.id = id;
+		this.id_1 = id_1;
+		this.demo1 = demo1;
+		this.demo2 = demo2;
+	}
+
+	// Property accessors
+
+	public RolesPrivilegeId getId() {
+		return this.id;
+	}
+
+	public void setId(RolesPrivilegeId id) {
+		this.id = id;
+	}
+
+	public Integer getId_1() {
+		return this.id_1;
+	}
+
+	public void setId_1(Integer id_1) {
+		this.id_1 = id_1;
+	}
+
+	public String getDemo1() {
+		return this.demo1;
+	}
+
+	public void setDemo1(String demo1) {
+		this.demo1 = demo1;
+	}
+
+	public String getDemo2() {
+		return this.demo2;
+	}
+
+	public void setDemo2(String demo2) {
+		this.demo2 = demo2;
+	}
+
+}

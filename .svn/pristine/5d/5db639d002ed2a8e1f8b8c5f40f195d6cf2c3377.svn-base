@@ -1,0 +1,49 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.Roles;
+
+@Repository
+public class RolesDao {
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+
+	public List<Roles> getRolesAll() {
+		String hq = "from Roles";
+		return hibernateTemplate.find(hq);
+	}
+	public boolean insertRoles(Roles roles) {
+		try {
+			hibernateTemplate.save(roles);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean updateRoles(Roles roles) {
+		try {
+			hibernateTemplate.save(roles);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean delRoles(int rolesId) {
+		Roles roles = hibernateTemplate.get(Roles.class, rolesId);
+		try {
+			hibernateTemplate.save(roles);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+}

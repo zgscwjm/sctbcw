@@ -1,0 +1,41 @@
+package com.sctbc.constant;
+
+/**
+ * 常量类
+ *
+ * @author Tzboy
+ */
+public interface Common_Base {
+	// Index
+	public static final String COMMON_INDEX_MODULE = "/Index";
+	// User
+	public static final String COMMON_USER_MODULE = "/User";
+	// Roles
+	public static final String COMMON_ROLES_MODULE = "/Roles";
+	// Resource
+	public static final String COMMON_RESOURCE_MODULE = "/Resource";
+	// Privilege
+	public static final String COMMON_PRIVILEGE_MODULE = "/Privilege";
+	// SysLogin
+	public static final String COMMON_SYSLOGIN_MODULE = "/SysLogin";
+	// DeptInfo
+	public static final String COMMON_DEPTINFO_MODULE = "/DeptInfo";
+	// TeachStaffInfo
+	public static final String COMMON_TEACHSTAFFINFO_MODULE = "/TeachStaffInfo";
+	// TeachStaffEnlargeInfo
+	public static final String COMMON_TEACHSTAFFENLARGEINFO_MODULE = "/TeachStaffEnlargeInfo";
+	// TeachStaffTrainInfo
+	public static final String COMMON_TEACHSTAFFTRAININFO_MODULE = "/TeachStaffTrainInfo";
+	// TrainInfo
+	public static final String COMMON_TRAININFO_MODULE = "/TrainInfo";
+	// TrainType
+	public static final String COMMON_TRAINTYPE_MODULE = "/TrainType";
+	// TrainApply
+	public static final String COMMON_TRAINAPPLY_MODULE = "/TrainApply";
+	// AuditingOpinion
+	public static final String COMMON_AUDITINGOPINION_MODULE = "/AuditingOpinion";
+	// ShortPeriodEstimate
+	public static final String COMMON_SHORTPERIODESTIMATE = "/ShortPeriodEstimate";
+	// LongPeriodEstimate
+	public static final String COMMON_LONGPERIODESTIMATE = "/LongPeriodEstimate";
+}

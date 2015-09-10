@@ -1,0 +1,125 @@
+package com.sctbc.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * User entity. @author MyEclipse Persistence Tools
+ */
+
+public class User implements java.io.Serializable {
+
+	// Fields
+
+	private String userId;
+	private Roles roles;
+	private Integer id;
+	private String password;
+	private String memo1;
+	private String memo2;
+	private Set teachstaffinfos = new HashSet(0);
+	private Set teachstafftraininfos = new HashSet(0);
+	private Set trainapplies = new HashSet(0);
+
+	// Constructors
+
+	/** default constructor */
+	public User() {
+	}
+
+	/** minimal constructor */
+	public User(Roles roles, Integer id, String password) {
+		this.roles = roles;
+		this.id = id;
+		this.password = password;
+	}
+
+	/** full constructor */
+	public User(Roles roles, Integer id, String password, String memo1,
+			String memo2, Set teachstaffinfos, Set teachstafftraininfos,
+			Set trainapplies) {
+		this.roles = roles;
+		this.id = id;
+		this.password = password;
+		this.memo1 = memo1;
+		this.memo2 = memo2;
+		this.teachstaffinfos = teachstaffinfos;
+		this.teachstafftraininfos = teachstafftraininfos;
+		this.trainapplies = trainapplies;
+	}
+
+	// Property accessors
+
+	public String getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public Roles getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Roles roles) {
+		this.roles = roles;
+	}
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getMemo1() {
+		return this.memo1;
+	}
+
+	public void setMemo1(String memo1) {
+		this.memo1 = memo1;
+	}
+
+	public String getMemo2() {
+		return this.memo2;
+	}
+
+	public void setMemo2(String memo2) {
+		this.memo2 = memo2;
+	}
+
+	public Set getTeachstaffinfos() {
+		return this.teachstaffinfos;
+	}
+
+	public void setTeachstaffinfos(Set teachstaffinfos) {
+		this.teachstaffinfos = teachstaffinfos;
+	}
+
+	public Set getTeachstafftraininfos() {
+		return this.teachstafftraininfos;
+	}
+
+	public void setTeachstafftraininfos(Set teachstafftraininfos) {
+		this.teachstafftraininfos = teachstafftraininfos;
+	}
+
+	public Set getTrainapplies() {
+		return this.trainapplies;
+	}
+
+	public void setTrainapplies(Set trainapplies) {
+		this.trainapplies = trainapplies;
+	}
+
+}

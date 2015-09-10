@@ -1,0 +1,490 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword"
+	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+<title>四川工商职业技术学院</title>
+
+<!-- Bootstrap core CSS -->
+<link href="<%=path%>/sctbc/assets/css/bootstrap.css" rel="stylesheet">
+<!--external css-->
+<link href="<%=path%>/sctbc/assets/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/sctbc/assets/css/zabuto_calendar.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/sctbc/assets/js/gritter/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/sctbc/assets/lineicons/style.css">
+
+<!-- Custom styles for this template -->
+<link href="<%=path%>/sctbc/assets/css/style.css" rel="stylesheet">
+<link href="<%=path%>/sctbc/assets/css/style-responsive.css"
+	rel="stylesheet">
+
+<script src="<%=path%>/sctbc/assets/js/chart-master/Chart.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+	<section id="container">
+		<!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+		<!--header start-->
+		<header class="header black-bg">
+			<jsp:include page="../header.jsp" />
+		</header>
+		<!--header end-->
+
+		<!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+		<!--sidebar start-->
+		<aside>
+			<jsp:include page="../left.jsp" />
+		</aside>
+		<!--sidebar end-->
+
+		<!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper">
+				<h3>
+					<i class="fa fa-angle-right"></i> 用户管理
+				</h3>
+
+				<!-- BASIC FORM ELELEMNTS -->
+				<div class="row mt">
+					<div class="col-lg-12">
+						<div class="form-panel">
+							<h4 class="mb" id="title_h4">
+								<i class="fa fa-angle-right"></i> 新增数据
+							</h4>
+							<h4 class="mb" id="prompt_h4"
+								style="height:50px;display:none;line-height:50px;">
+								<i class="fa fa-angle-right"></i> <i id="prompt"
+									style="left:20px;"></i>
+							</h4>
+							<form class="form-horizontal style-form" id="add_form"
+								method="POST">
+								<!-- 第一步  start-->
+								<div id="first">
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;">用户名：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="userID"
+												name="userId">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;margin-left:100px;">角色信息：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<select class="form-control" id="roleID" name="roleId">
+												<option value="-1">请选择用户角色</option>
+												<c:forEach items="${rolesList}" var="rolesdata">
+													<option value="${rolesdata.roleId}">${rolesdata.roleName}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;">密码：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="password" class="form-control" id="password"
+												name="password">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;margin-left:100px;">重复密码：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="password" class="form-control"
+												id="RepeatPassword">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-10" style="width:200px;">
+											<button class="btn btn-theme04" type="button" id="first_next">下一步</button>
+											<button class="btn btn-theme03" onclick="history.go(-1)">返回</button>
+										</div>
+									</div>
+								</div>
+								<!-- 第一步 end -->
+
+								<!-- 第二部 start  -->
+								<div id="second" style="display: none">
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;">教工编号：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="USERID2" disabled>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;margin-left:100px;">教工姓名：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="name" name="name">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;">教工性别：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<select class="form-control" id="sex" name="sex">
+												<option value="男">男</option>
+												<option value="女">女</option>
+											</select>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;margin-left:100px;">教工民族：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+
+											<select class="form-control" id="ethnicity" name="ethnicity">
+												<option value="汉族">汉族</option>
+												<option value="蒙古族">蒙古族</option>
+												<option value="彝族">彝族</option>
+												<option value="侗族">侗族</option>
+												<option value="哈萨克族">哈萨克族</option>
+												<option value="畲族">畲族</option>
+												<option value="纳西族">纳西族</option>
+												<option value="仫佬族">仫佬族</option>
+												<option value="仡佬族">仡佬族</option>
+												<option value="怒族">怒族</option>
+												<option value="保安族">保安族</option>
+												<option value="鄂伦春族">鄂伦春族</option>
+												<option value="回族">回族</option>
+												<option value="壮族">壮族</option>
+												<option value="瑶族">瑶族</option>
+												<option value="傣族">傣族</option>
+												<option value="高山族">高山族</option>
+												<option value="景颇族">景颇族</option>
+												<option value="羌族">羌族</option>
+												<option value="锡伯族">锡伯族</option>
+												<option value="乌孜别克族">乌孜别克族</option>
+												<option value="裕固族">裕固族</option>
+												<option value="赫哲族">赫哲族</option>
+												<option value="藏族">藏族</option>
+												<option value="布依族">布依族</option>
+												<option value="白族">白族</option>
+												<option value="黎族">黎族</option>
+												<option value="拉祜族">拉祜族</option>
+												<option value="柯尔克孜族">柯尔克孜族</option>
+												<option value="布朗族">布朗族</option>
+												<option value="阿昌族">阿昌族</option>
+												<option value="俄罗斯族">俄罗斯族</option>
+												<option value="京族">京族</option>
+												<option value="门巴族">门巴族</option>
+												<option value="维吾尔族">维吾尔族</option>
+												<option value="朝鲜族">朝鲜族</option>
+												<option value="土家族">土家族</option>
+												<option value="傈僳族">傈僳族</option>
+												<option value="水族">水族</option>
+												<option value="土族">土族</option>
+												<option value="撒拉族">撒拉族</option>
+												<option value="普米族">普米族</option>
+												<option value="鄂温克族">鄂温克族</option>
+												<option value="塔塔尔族">塔塔尔族</option>
+												<option value="珞巴族">珞巴族</option>
+												<option value="苗族">苗族</option>
+												<option value="满族">满族</option>
+												<option value="哈尼族">哈尼族</option>
+												<option value="佤族">佤族</option>
+												<option value="东乡族">东乡族</option>
+												<option value="达斡尔族">达斡尔族</option>
+												<option value="毛南族">毛南族</option>
+												<option value="塔吉克族">塔吉克族</option>
+												<option value="德昂族">德昂族</option>
+												<option value="独龙族">独龙族</option>
+												<option value="基诺族">基诺族</option>
+											</select> </select>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-10" style="width:500px;">
+											<button class="btn btn-theme04" type="button"
+												id="second_next">下一步</button>
+											<button class="btn btn-theme03" onclick="return_first">返回上一步</button>
+										</div>
+									</div>
+								</div>
+								<!-- 第二步 end -->
+
+
+								<!-- 第三步 start -->
+								<div id="three" style="display:none">
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;">教工编号：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:10px;">
+											<input type="text" class="form-control" id="USERID3"  disabled>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:100px;margin-left:80px;">所属部门：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-10px;">
+											<select class="form-control" id="depID" name="depID">
+												<option value="-1">请选择所属部门</option>
+												<c:forEach items="${deptInfoList}" var="deptInfodata">
+													<option value="${deptInfodata.depID}">${deptInfodata.depName}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:110px;margin-left:70px;">身份证号码：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-10px;">
+											<input type="text" class="form-control" id="IDNumber"
+												name="IDNumber">
+										</div>
+
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:120px;">现任职时间：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-10px;">
+											<input type="text" class="form-control" id="presentWorkTime"
+												name="presentWorkTime">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:60px;">参加工作时间：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-30px;">
+											<input class="form-control" id="startWorkTime"
+												name="startWorkTime" value="">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:120px;margin-left:80px;">毕业时间：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-30px;">
+											<input type="text" class="form-control" id="graduateTime"
+												name="graduateTime">
+										</div>
+
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">最后毕业学校：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control"
+												id="lastGraduateSchool" name="lastGraduateSchool">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">进入本单位形式：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="enterForm"
+												name="enterForm">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;margin-left:60px;">进入学院来源：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="enterSource"
+												name="enterSource">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">人员状态：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="status"
+												name="status">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">所学专业：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="schoolSpecialty"
+												name="schoolSpecialty">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;margin-left:60px;">现从事专业：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="workSpecialty"
+												name="workSpecialty">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">主岗位类别：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="primaryPost"
+												name="primaryPost">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">兼职岗位类别：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="secondaryPost"
+												name="secondaryPost">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;margin-left:60px;">岗位工资：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="postSalary"
+												name="postSalary">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">薪级工资：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="gradeSalary"
+												name="gradeSalary">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">婚姻状态：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+										<select class="form-control" id="marriage"
+												name="marriage">
+										  <option value="未婚">未婚</option>
+										  <option value="已婚">已婚</option>
+										  <option value="离异">离异</option>
+										</select>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;margin-left:60px;">政治面貌：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<select class="form-control" id="political" name="political">
+												<option value="民众">民众</option>
+												<option value="团员">团员</option>
+												<option value="党员">党员</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">最高学历：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<select class="form-control" id="highestEducation"
+												name="highestEducation">
+												<option value="">请选择学历</option>
+												<option value="初中">初中</option>
+												<option value="高中">高中</option>
+												<option value="本科">本科</option>
+											</select>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">最高学位：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<select class="form-control" id="highestGrade"
+												name="highestGrade">
+												<option value="">请选择学位</option>
+												<option value="学士">学士</option>
+												<option value="硕士">硕士</option>
+												<option value="博士">博士</option>
+											</select>
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;margin-left:60px;">现任专业技术职务（职称）：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="specialtyRank"
+												name="specialtyRank">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:130px;">兴趣爱好：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+											<input type="text" class="form-control" id="interests"
+												name="interests">
+										</div>
+										<label class="col-sm-2 col-sm-2 control-label"
+											style="width:140px;margin-left:50px;">身份类别：</label>
+										<div class="col-sm-10" style="width:200px;margin-left:-20px;">
+
+											<select class="form-control" id="userType" name="userType">
+												<option value="">请选择身份类别</option>
+												<option value="干部">干部</option>
+												<option value="专技">专技</option>
+												<option value="工勤">工勤</option>
+											</select>
+										</div>
+									</div>
+									<!-- 妈蛋！！！终于加完了   好多玩意儿    复制都累！！ -->
+									<div class="form-group">
+										<div class="col-sm-10" style="width:200px;">
+											<button class="btn btn-theme04" type="button" id="add_sub">提交</button>
+											<button class="btn btn-theme03" id="return_second">返回</button>
+										</div>
+									</div>
+								</div>
+								<!-- 第三步  end -->
+							</form>
+						</div>
+					</div>
+					<!-- col-lg-12-->
+				</div>
+				<!-- /row -->
+
+
+			</section>
+			<! --/wrapper -->
+		</section>
+
+		<!--main content end-->
+		<!--footer start-->
+		<footer class="site-footer" style=" margin-top:200px;width:100%;">
+			<div class="text-center">
+				2014 - 2015 <a href="http://www.mycodes.net/" target="_blank">四川工商职业技术学院</a>
+				<a href="http://www.mycodes.net/" target="_blank">人事管理系统</a> <a
+					href="index.html#" class="go-top"> <i class="fa fa-angle-up"></i>
+				</a>
+			</div>
+		</footer>
+		<!--footer end-->
+	</section>
+
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script src="<%=path%>/sctbc/assets/js/jquery.js"></script>
+	<script src="<%=path%>/sctbc/assets/js/jquery-1.8.3.min.js"></script>
+	<script src="<%=path%>/sctbc/assets/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript"
+		src="<%=path%>/sctbc/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="<%=path%>/sctbc/assets/js/jquery.scrollTo.min.js"></script>
+	<script src="<%=path%>/sctbc/assets/js/jquery.nicescroll.js"
+		type="text/javascript"></script>
+	<script src="<%=path%>/sctbc/assets/js/jquery.sparkline.js"></script>
+
+
+	<!--common script for all pages-->
+	<script src="<%=path%>/sctbc/assets/js/common-scripts.js"></script>
+
+	<script type="text/javascript"
+		src="<%=path%>/sctbc/assets/js/gritter/js/jquery.gritter.js"></script>
+	<script type="text/javascript"
+		src="<%=path%>/sctbc/assets/js/gritter-conf.js"></script>
+
+	<script src="<%=path%>/sctbc/js/validate.js"></script>
+	<script src="<%=path%>/sctbc/js/User/user.js"></script>
+	<script src="<%=path%>/sctbc/js/User/user_budle.js"></script>
+	<script type="text/javascript"
+		src="<%=path%>/sctbc/js/plug-in/laydate/laydate.js"></script>
+	<script type="text/javascript">
+		!function() {
+			laydate({
+				elem : '#startWorkTime'
+			});//绑定元素
+			laydate({
+				elem : '#graduateTime'
+			});//绑定元素
+		}();
+	</script>
+</body>
+</html>

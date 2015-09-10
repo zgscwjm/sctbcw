@@ -1,0 +1,49 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.Trainapply;
+
+@Repository
+public class TrainapplyDao {
+
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+
+	public List<Trainapply> getTrainapplyAll() {
+		String hql = "from Trainapply";
+		return hibernateTemplate.find(hql);
+	}
+	public boolean insertTrainapply(Trainapply trainapply) {
+		try {
+			hibernateTemplate.save(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean updateTrainapply(Trainapply trainapply) {
+		try {
+			hibernateTemplate.update(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean delTrainapply(int trainapplyId) {
+		Trainapply trainapply = hibernateTemplate.get(Trainapply.class,
+				trainapplyId);
+		try {
+			hibernateTemplate.delete(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+}

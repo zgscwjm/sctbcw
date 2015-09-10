@@ -1,0 +1,56 @@
+package com.sctbc.server_i;
+
+import com.sctbc.entity.Teachstaffenlargeinfo;
+
+
+/**
+ * 教职工扩展信息表
+ * @author zgscwjm
+ *
+ */
+public interface ITeachStaffEnlargeInfo {
+
+	/**
+	 * 
+	 * @param userId 教工编号,不能为空
+	 * @param depId 部门编号,不能为空
+	 * @param idnumber 身份证号,不能为空
+	 * @param userType 教工类型,后面的参数都可以为空
+	 * @param enterForm 
+	 * @param enterSource
+	 * @param gradeSalary
+	 * @param graduateTime
+	 * @param highestEducation
+	 * @param highestGrade
+	 * @param interests
+	 * @param lastGraduateSchool
+	 * @param marriage
+	 * @param political
+	 * @param presentWorkTime
+	 * @param primaryPost
+	 * @param schoolSpecialty
+	 * @param secondaryPost
+	 * @param startWorkTime
+	 * @param status 
+	 * @param workSpecialty
+	 * @return
+	 */
+	public Teachstaffenlargeinfo addTeachstaffenlargeinfo(String userId,
+			String depId,String idnumber,String userType, String enterForm,
+			String enterSource, Double gradeSalary, String graduateTime,
+			String highestEducation, String highestGrade,
+			String interests, String lastGraduateSchool, String marriage,
+			String political, String presentWorkTime, String primaryPost,
+			String schoolSpecialty, String secondaryPost,
+			String startWorkTime, String status, String workSpecialty);
+	
+	
+	public boolean upTeachstaffenlargeinfo(String userId,
+			String depId,String idnumber,String userType, String enterForm,
+			String enterSource, Double gradeSalary, String graduateTime,
+			String highestEducation, String highestGrade,
+			String interests, String lastGraduateSchool, String marriage,
+			String political, String presentWorkTime, String primaryPost,
+			String schoolSpecialty, String secondaryPost,
+			String startWorkTime, String status, String workSpecialty);
+}

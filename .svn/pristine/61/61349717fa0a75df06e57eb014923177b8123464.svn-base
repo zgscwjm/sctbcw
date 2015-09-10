@@ -1,0 +1,51 @@
+package com.sctbc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_TrainType;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_TRAINTYPE_MODULE)
+public class TrainTypeController {
+	private static final String LISTPATH = "/sctbc/Page/trainType/list";
+	private static final String ADDPATH = "/sctbc/Page/trainType/add";
+	private static final String EDITPATH = "/sctbc/Page/trainType/edit";
+
+	private final boolean result = true;
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_GETTRAINTYPEALL)
+	public String getTrainTypeAll() {
+		return LISTPATH;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_ADDTRAINTYPE)
+	public String addTrainType() {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_EDITTRAINTYPE)
+	public String editTrainType() {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_DELTRAINTYPE)
+	public String delTrainType() {
+		return result + "";
+	}
+
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_ADDtRAINTYPEINDEX)
+	public String addTrainTypeIndex() {
+		return ADDPATH;
+	}
+
+	@RequestMapping(value = Common_TrainType.TRAINTYPE_EDITTRAINTYPEINDEX)
+	public String editTrainTypeIndex() {
+		return EDITPATH;
+	}
+
+}

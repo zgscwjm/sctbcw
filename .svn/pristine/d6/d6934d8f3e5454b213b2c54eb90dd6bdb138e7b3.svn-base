@@ -1,0 +1,14 @@
+package com.sctbc.server_i;
+
+import com.sctbc.entity.Deptinfo;
+
+public interface IDeptInfo extends IBaseServer<Deptinfo>{
+
+	/**
+	 * 添加部门信息
+	 * @param depName 部门名称
+	 * @param depLeaderId 领导教工id
+	 * @return true成功 ,false 失败
+	 */
+	public boolean addDeptInfo(String depName,String depLeaderId);
+}

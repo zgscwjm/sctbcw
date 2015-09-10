@@ -1,0 +1,21 @@
+package com.sctbc.constant;
+
+/**
+ * 常量类
+ * 
+ * @author Tzboy
+ */
+public interface Common_Base {
+	// Index
+	public static final String COMMON_INDEX_MODULE = "/Index";
+	// User
+	public static final String COMMON_USER_MODULE = "/User";
+	// DeptInfo
+	public static final String COMMON_DEPTINFO_MODULE = "/DeptInfo";
+	// TeachStaffInfo
+	public static final String COMMON_TEACHSTAFFINFO_MODULE = "/TeachStaffInfo";
+	// TeachStaffEnlargeInfo
+	public static final String COMMON_TEACHSTAFFENLARGEINFO_MODULE = "/TeachStaffEnlargeInfo";
+	// TeachStaffTrainInfo
+	public static final String COMMON_TEACHSTAFFTRAININFO_MODULE = "/TeachStaffTrainInfo";
+}

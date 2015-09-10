@@ -1,0 +1,50 @@
+package com.sctbc.servers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.UserDao;
+import com.sctbc.entity.User;
+
+@Service
+public class UserServer implements BaseServer<User>{
+
+	@Autowired
+	private UserDao userDao;
+	
+	@Override
+	public User getById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.getUserById(id);
+	}
+
+	@Override
+	public List<User> getList() {
+		// TODO Auto-generated method stub
+		return userDao.getUserAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.delUser(id);
+	}
+
+	@Override
+	public boolean upData(User t) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(t);
+	}
+	
+	
+	
+	public User userLogin(String username,String password)
+	{
+		 List<User> list=userDao.getUserByNameAndPwd(username, password);
+		 return list.get(0);
+	}
+
+}

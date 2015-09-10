@@ -1,0 +1,50 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.TrainapplyDao;
+import com.sctbc.entity.Trainapply;
+import com.sctbc.server_i.ITrainApply;
+
+@Service
+public class TrainServer implements ITrainApply{
+
+	@Autowired
+	TrainapplyDao trainapplyDao;
+	
+	@Override
+	public Trainapply getById(int id) {
+		// TODO Auto-generated method stub
+		return trainapplyDao.getTrainapplyById(id);
+	}
+
+	@Override
+	public List<Trainapply> getList() {
+		// TODO Auto-generated method stub
+		return trainapplyDao.getTrainapplyAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		
+		return trainapplyDao.delTrainapply(id);
+	}
+
+	@Override
+	public boolean upData(Trainapply t) {
+		// TODO Auto-generated method stub
+		return trainapplyDao.updateTrainapply(t);
+	}
+
+	@Override
+	public boolean addTrainApply(Trainapply trainapply) {
+		// TODO Auto-generated method stub
+		
+		return false;
+	}
+
+}

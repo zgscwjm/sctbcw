@@ -1,0 +1,533 @@
+package com.sctbc.servers_impl;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.DeptinfoDao;
+import com.sctbc.dao.TeachstaffenlargeinfoDao;
+import com.sctbc.dao.TeachstaffinfoDao;
+import com.sctbc.dao.UserDao;
+import com.sctbc.entity.Deptinfo;
+import com.sctbc.entity.Teachstaffenlargeinfo;
+import com.sctbc.entity.Teachstaffinfo;
+import com.sctbc.entity.Teachstafftraininfo;
+import com.sctbc.entity.Trainapply;
+import com.sctbc.entity.User;
+import com.sctbc.server_i.IRole;
+import com.sctbc.server_i.ITeachStaffEnlargeInfo;
+import com.sctbc.server_i.ITeachStaffInfo;
+import com.sctbc.server_i.IUser;
+import com.sctbc.util.MD5;
+import com.sctbc.util.SctbcString;
+
+@Service
+public class UserServer implements IUser, ITeachStaffInfo,
+		ITeachStaffEnlargeInfo {
+
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private IRole roleServer;
+
+	@Autowired
+	private TeachstaffinfoDao teachstaffinfoDao;
+
+	@Autowired
+	private TeachstaffenlargeinfoDao teachstaffenlargeinfoDao;
+
+
+	@Autowired
+	private DeptinfoDao deptinfoDao;
+
+	@Override
+	public User getById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.getUserById(String.valueOf(id));
+	}
+
+
+	@Override
+	public User getById(String id) {
+		// TODO Auto-generated method stub
+		return userDao.getUserById(id);
+	}
+
+	@Override
+	public List<User> getList() {
+		// TODO Auto-generated method stub
+		return userDao.getUserAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.delUser(new String().valueOf(id));
+	}
+
+	@Override
+	public boolean upData(User t) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(t);
+	}
+
+	@Override
+	public boolean upUser(String UserId, String Password, int RolesId,
+			Teachstaffinfo teachstaffinfo,
+			Teachstafftraininfo teachstafftraininfo, Trainapply trainapply,
+			String memo1, String memo2) {
+
+		User user = userDao.getUserById(UserId);
+
+		user.setMemo1(memo1);
+		user.setMemo2(memo2);
+		Set<Teachstaffinfo> set = new HashSet<Teachstaffinfo>();
+		set.add(teachstaffinfo);
+		user.setTeachstaffinfos(set);
+		Set<Teachstafftraininfo> set2 = new HashSet<Teachstafftraininfo>();
+		set2.add(teachstafftraininfo);
+		user.setTeachstafftraininfos(set2);
+		Set<Trainapply> set3 = new HashSet<Trainapply>();
+		set3.add(trainapply);
+		user.setTrainapplies(set3);
+
+		user.setPassword(MD5.GetMD5Code(Password));
+		;
+
+		// 权限
+		user.setRoles(roleServer.getById(RolesId));
+
+		return this.upData(user);
+	}
+
+	/**
+	 * 用户登录
+	 *
+	 * @param username
+	 *            用户名
+	 * @param password
+	 *            密码
+	 * @return
+	 */
+	@Override
+	public User userLogin(String username, String password) {
+		List<User> list = userDao.getUserByNameAndPwd(username,
+				MD5.GetMD5Code(password));
+
+
+		System.out.println("zgscwjm001");
+		if (list.size()>0) {
+			System.out.println("zgscwjm");
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public User register(String UserId, String Password, int RolesId,
+			Teachstaffinfo teachstaffinfo,
+			Teachstafftraininfo teachstafftraininfo, Trainapply trainapply,
+			String memo1, String memo2) {
+		User user = new User();
+		user.setMemo1(memo1);
+		user.setMemo2(memo2);
+		Set<Teachstaffinfo> set = new HashSet<Teachstaffinfo>();
+		set.add(teachstaffinfo);
+		user.setTeachstaffinfos(set);
+		Set<Teachstafftraininfo> set2 = new HashSet<Teachstafftraininfo>();
+		set2.add(teachstafftraininfo);
+		user.setTeachstafftraininfos(set2);
+		Set<Trainapply> set3 = new HashSet<Trainapply>();
+		set3.add(trainapply);
+		user.setTrainapplies(set3);
+
+		user.setPassword(MD5.GetMD5Code(Password));
+		;
+
+		// 权限
+		user.setRoles(roleServer.getById(RolesId));
+
+		user.setUserId(UserId);
+
+		return userDao.insertUser(user);
+	}
+
+	@Override
+	public boolean checkUserId(String username) {
+		// TODO Auto-generated method stub
+
+		if (userDao.getUserById(username) == null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	@Override
+	public Teachstaffinfo addTeachstaffinfo(String memo1, String memo2,
+			User user, String name, String sex, String ethnicity) {
+		// TODO Auto-generated method stub
+		Teachstaffinfo teachstaffinfo = new Teachstaffinfo();
+		teachstaffinfo.setMemo1(memo1);
+		teachstaffinfo.setMemo2(memo2);
+		teachstaffinfo.setUser(user);
+		teachstaffinfo.setName(name);
+		teachstaffinfo.setSex(sex);
+		teachstaffinfo.setEthnicity(ethnicity);
+		return teachstaffinfoDao.insertTeachstaffinfo(teachstaffinfo);
+
+	}
+
+	@Override
+	public boolean upTeachstaffinfo(String id,String memo1, String memo2, User user,
+			String name, String sex, String ethnicity) {
+		// TODO Auto-generated method stub
+		Teachstaffinfo teachstaffinfo = teachstaffinfoDao
+				.getTeachstaffinfo(id);
+		if (teachstaffinfo == null) {
+			return false;
+		} else {
+			teachstaffinfo.setMemo1(memo1);
+			teachstaffinfo.setMemo2(memo2);
+			teachstaffinfo.setUser(user);
+			teachstaffinfo.setName(name);
+			teachstaffinfo.setSex(sex);
+			teachstaffinfo.setEthnicity(ethnicity);
+			return teachstaffinfoDao.updateTeachstaffinfo(teachstaffinfo);
+		}
+	}
+
+	@Override
+	public Teachstaffinfo getTeachstaffinfo(String userId) {
+		// TODO Auto-generated method stub
+		return teachstaffinfoDao.getTeachstaffinfo(userId);
+	}
+
+	@Override
+	public List<Teachstaffinfo> getAllTeachstaffinfo() {
+		// TODO Auto-generated method stub
+		return teachstaffinfoDao.getTeachstaffinfoAll();
+	}
+
+	@Override
+	public Teachstaffenlargeinfo addTeachstaffenlargeinfo(User user,
+			Deptinfo deptinfo, String idnumber, String userType, String enterForm,
+			String enterSource, Double gradeSalary, String graduateTime,
+			String highestEducation, String highestGrade, String interests,
+			String lastGraduateSchool, String marriage, String political,
+			String presentWorkTime, String primaryPost, String schoolSpecialty,
+			String secondaryPost, String startWorkTime, String status,
+			String workSpecialty) {
+		// TODO Auto-generated method stub
+
+		Teachstaffenlargeinfo teachstaffenlargeinfo = new Teachstaffenlargeinfo();
+
+		// 用户id
+		if (user == null) {
+			return null;
+		}
+		teachstaffenlargeinfo.setUser(user);
+		// 部门编号
+		if (deptinfo == null) {
+			return null;
+		}
+		teachstaffenlargeinfo.setDeptinfo(deptinfo);
+
+		// 身份证号
+		if (idnumber == null) {
+			return null;
+		}
+		teachstaffenlargeinfo.setIdnumber(idnumber);
+
+		if (enterForm == null) {
+			enterForm = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setEnterForm(enterForm);
+		}
+
+		if (enterSource == null) {
+			enterSource = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setEnterSource(enterSource);
+		}
+
+		// 薪水
+		if (gradeSalary == null) {
+			gradeSalary = 0.0;
+			teachstaffenlargeinfo.setGradeSalary(gradeSalary);
+		}
+
+		// 毕业时间
+		if (graduateTime == null) {
+			graduateTime = SctbcString.UNKNOWTIME_STRING;
+			teachstaffenlargeinfo.setGraduateTime(graduateTime);
+		}
+
+		// 最高学历
+		if (highestEducation == null) {
+			highestEducation = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setHighestEducation(highestEducation);
+		}
+
+		// 最高学位
+		if (highestGrade == null) {
+			highestGrade = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setHighestGrade(highestGrade);
+		}
+
+		// 兴趣
+		if (interests == null) {
+			interests = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setInterests(interests);
+		}
+
+		if (lastGraduateSchool == null) {
+			lastGraduateSchool = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setLastGraduateSchool(lastGraduateSchool);
+		}
+
+		if (marriage == null) {
+			marriage = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setMarriage(marriage);
+		}
+		// teachstaffenlargeinfo.setMemo1(memo1);
+		// teachstaffenlargeinfo.setMemo2(memo2);
+
+		if (political == null) {
+			political = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setPolitical(political);
+		}
+
+		if (presentWorkTime == null) {
+			presentWorkTime = SctbcString.UNKNOWTIME_STRING;
+			teachstaffenlargeinfo.setPresentWorkTime(presentWorkTime);
+		}
+
+		if (primaryPost == null) {
+			primaryPost = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setPrimaryPost(primaryPost);
+		}
+
+		if (schoolSpecialty == null) {
+			schoolSpecialty = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setSchoolSpecialty(schoolSpecialty);
+		}
+
+		if (secondaryPost == null) {
+			secondaryPost = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setSecondaryPost(secondaryPost);
+		}
+
+		if (startWorkTime == null) {
+			startWorkTime = SctbcString.UNKNOWTIME_STRING;
+			teachstaffenlargeinfo.setStartWorkTime(startWorkTime);
+		}
+
+		if (status == null) {
+			status = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setStatus(status);
+		}
+
+		if (userType == null) {
+			userType = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setUserType(userType);
+		}
+
+		if (workSpecialty == null) {
+			workSpecialty = SctbcString.UNKNOW_STRING;
+			teachstaffenlargeinfo.setWorkSpecialty(workSpecialty);
+		}
+
+		return teachstaffenlargeinfoDao
+				.insertTeachstaffenlargeinfo(teachstaffenlargeinfo);
+	}
+
+	@Override
+	public boolean upTeachstaffenlargeinfo(User user, String depId,
+			String idnumber, String userType, String enterForm,
+			String enterSource, Double gradeSalary, String graduateTime,
+			String highestEducation, String highestGrade, String interests,
+			String lastGraduateSchool, String marriage, String political,
+			String presentWorkTime, String primaryPost, String schoolSpecialty,
+			String secondaryPost, String startWorkTime, String status,
+			String workSpecialty) {
+		// TODO Auto-generated method stub
+
+		return false;
+	}
+
+	@Override
+	public Teachstaffenlargeinfo addTeachstaffenlargeinfo(User user,
+			Teachstaffenlargeinfo teachstaffenlargeinfo) {
+		// TODO Auto-generated method stub
+		teachstaffenlargeinfo.setUser(user);
+		return teachstaffenlargeinfoDao.insertTeachstaffenlargeinfo(teachstaffenlargeinfo);
+	}
+
+	@Override
+	public boolean upTeachstaffenlargeinfo(
+			Teachstaffenlargeinfo teachstaffenlargeinfo) {
+		// TODO Auto-generated method stub
+		return teachstaffenlargeinfoDao.updateTeachstaffenlargeinfo(teachstaffenlargeinfo);
+	}
+
+	@Override
+	public boolean upUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(user);
+	}
+
+	@Override
+	public User register(User user, Teachstaffinfo teachstaffinfo,
+			Teachstaffenlargeinfo teachstaffenlargeinfo) {
+		// TODO Auto-generated method stub
+		user.setPassword(MD5.GetMD5Code(user.getPassword()));
+		User user2=userDao.insertUser(user);
+
+		teachstaffinfo.setUser(user2);
+		teachstaffinfoDao.insertTeachstaffinfo(teachstaffinfo);
+		if(teachstaffenlargeinfo!=null)
+		{
+			if (teachstaffenlargeinfo.getDeptinfo()== null) {
+
+
+				Deptinfo deptinfo=deptinfoDao.getDeptinfo(2);
+				teachstaffenlargeinfo.setDeptinfo(deptinfo);
+			}
+
+			// 身份证号
+			if (teachstaffenlargeinfo.getIdnumber()== null||teachstaffenlargeinfo.getIdnumber().equals("")) {
+				teachstaffenlargeinfo.setIdnumber(SctbcString.UNKNOW_STRING);;
+			}
+
+			if (teachstaffenlargeinfo.getEnterForm()== null||teachstaffenlargeinfo.getEnterForm().equals("")) {
+				teachstaffenlargeinfo.setEnterForm(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getEnterSource()== null||teachstaffenlargeinfo.getEnterSource().equals("")) {
+				teachstaffenlargeinfo.setEnterSource(SctbcString.UNKNOW_STRING);
+			}
+
+			// 薪水
+			if (teachstaffenlargeinfo.getGradeSalary()== null) {
+				teachstaffenlargeinfo.setGradeSalary(0.0);
+			}
+
+			// 毕业时间
+			if (teachstaffenlargeinfo.getGraduateTime()== null||teachstaffenlargeinfo.getGraduateTime().equals("")) {
+				teachstaffenlargeinfo.setGraduateTime(SctbcString.UNKNOWTIME_STRING);
+			}
+
+			// 最高学历
+			if (teachstaffenlargeinfo.getHighestEducation()==null||teachstaffenlargeinfo.getHighestEducation().equals("")) {
+				teachstaffenlargeinfo.setHighestEducation(SctbcString.UNKNOW_STRING);
+			}
+
+			// 最高学位
+			if (teachstaffenlargeinfo.getHighestGrade()== null||teachstaffenlargeinfo.getHighestGrade().equals("")) {
+				teachstaffenlargeinfo.setHighestGrade(SctbcString.UNKNOW_STRING);
+			}
+
+			// 兴趣
+			if (teachstaffenlargeinfo.getInterests() == null||teachstaffenlargeinfo.getInterests().equals("")) {
+				teachstaffenlargeinfo.setInterests(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getLastGraduateSchool()== null||teachstaffenlargeinfo.getLastGraduateSchool().equals("")) {
+				teachstaffenlargeinfo.setLastGraduateSchool(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getMarriage()== null) {
+				teachstaffenlargeinfo.setMarriage(SctbcString.UNKNOW_STRING);
+			}
+			// teachstaffenlargeinfo.setMemo1(memo1);
+			// teachstaffenlargeinfo.setMemo2(memo2);
+
+			if (teachstaffenlargeinfo.getPolitical()== null||teachstaffenlargeinfo.getPolitical().equals("")) {
+				teachstaffenlargeinfo.setPolitical(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getPresentWorkTime()== null||teachstaffenlargeinfo.getPresentWorkTime().equals("")) {
+				teachstaffenlargeinfo.setPresentWorkTime( SctbcString.UNKNOWTIME_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getPrimaryPost() == null||teachstaffenlargeinfo.getPrimaryPost().equals("")) {
+				teachstaffenlargeinfo.setPrimaryPost(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getSchoolSpecialty() == null||teachstaffenlargeinfo.getSchoolSpecialty().equals("")) {
+				teachstaffenlargeinfo.setSchoolSpecialty( SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getSecondaryPost()== null||teachstaffenlargeinfo.getSecondaryPost().equals("")) {
+				teachstaffenlargeinfo.setSecondaryPost( SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getStartWorkTime() == null||teachstaffenlargeinfo.getStartWorkTime().equals("") ) {
+				teachstaffenlargeinfo.setStartWorkTime( SctbcString.UNKNOWTIME_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getStatus() == null||teachstaffenlargeinfo.getStatus().equals("")) {
+				teachstaffenlargeinfo.setStatus(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getUserType() == null||teachstaffenlargeinfo.getUserType() .equals("")) {
+				teachstaffenlargeinfo.setUserType(SctbcString.UNKNOW_STRING);
+			}
+
+			if (teachstaffenlargeinfo.getWorkSpecialty() == null||teachstaffenlargeinfo.getWorkSpecialty() .equals("")) {
+				teachstaffenlargeinfo.setWorkSpecialty(SctbcString.UNKNOW_STRING);
+			}
+
+
+			teachstaffenlargeinfo.setUser(user2);
+			teachstaffenlargeinfoDao.insertTeachstaffenlargeinfo(teachstaffenlargeinfo);
+		}
+		return user2;
+	}
+
+
+	@Override
+	public boolean changPsw(String userid,String psw) {
+		// TODO Auto-generated method stub
+		User user=this.getById(userid);
+		user.setPassword(MD5.GetMD5Code(psw));
+		return this.upData(user);
+	}
+
+
+	@Override
+	public List<User> searchUser(String key) {
+		// TODO Auto-generated method stub
+		return userDao.search(key);
+	}
+
+
+	@Override
+	public boolean delUser(String id) {
+		// TODO Auto-generated method stub
+		return userDao.delUser(id);
+	}
+
+	@Override
+	public Teachstaffenlargeinfo getTeachstaffenlargeinfoByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return teachstaffenlargeinfoDao
+				.getTeachstaffenlargeinfoByUserId(userId);
+	}
+
+	@Override
+	public List<Teachstaffenlargeinfo> getTeachstaffenlargeinfoAll() {
+		return teachstaffenlargeinfoDao.getTeachstaffenlargeinfoAll();
+	}
+
+	@Override
+	public List<User> getUserByNoTeachstaffenlargeinfo() {
+		// TODO Auto-generated method stub
+		return userDao.getUserNoTeachstaffenlargeinfo();
+	}
+
+}

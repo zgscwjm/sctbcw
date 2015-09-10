@@ -1,0 +1,163 @@
+package com.sctbc.entity;
+
+/**
+ * ProcedureId entity. @author MyEclipse Persistence Tools
+ */
+
+public class ProcedureId implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Integer parentId;
+	private String name;
+	private Integer isend;
+	private Integer memo1;
+	private Integer memo2;
+	private String memo3;
+	private String memo4;
+
+	// Constructors
+
+	/** default constructor */
+	public ProcedureId() {
+	}
+
+	/** full constructor */
+	public ProcedureId(Integer id, Integer parentId, String name,
+			Integer isend, Integer memo1, Integer memo2, String memo3,
+			String memo4) {
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.isend = isend;
+		this.memo1 = memo1;
+		this.memo2 = memo2;
+		this.memo3 = memo3;
+		this.memo4 = memo4;
+	}
+
+	// Property accessors
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getParentId() {
+		return this.parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getIsend() {
+		return this.isend;
+	}
+
+	public void setIsend(Integer isend) {
+		this.isend = isend;
+	}
+
+	public Integer getMemo1() {
+		return this.memo1;
+	}
+
+	public void setMemo1(Integer memo1) {
+		this.memo1 = memo1;
+	}
+
+	public Integer getMemo2() {
+		return this.memo2;
+	}
+
+	public void setMemo2(Integer memo2) {
+		this.memo2 = memo2;
+	}
+
+	public String getMemo3() {
+		return this.memo3;
+	}
+
+	public void setMemo3(String memo3) {
+		this.memo3 = memo3;
+	}
+
+	public String getMemo4() {
+		return this.memo4;
+	}
+
+	public void setMemo4(String memo4) {
+		this.memo4 = memo4;
+	}
+
+	public boolean equals(Object other) {
+		if ((this == other))
+			return true;
+		if ((other == null))
+			return false;
+		if (!(other instanceof ProcedureId))
+			return false;
+		ProcedureId castOther = (ProcedureId) other;
+
+		return ((this.getId() == castOther.getId()) || (this.getId() != null
+				&& castOther.getId() != null && this.getId().equals(
+				castOther.getId())))
+				&& ((this.getParentId() == castOther.getParentId()) || (this
+						.getParentId() != null
+						&& castOther.getParentId() != null && this
+						.getParentId().equals(castOther.getParentId())))
+				&& ((this.getName() == castOther.getName()) || (this.getName() != null
+						&& castOther.getName() != null && this.getName()
+						.equals(castOther.getName())))
+				&& ((this.getIsend() == castOther.getIsend()) || (this
+						.getIsend() != null && castOther.getIsend() != null && this
+						.getIsend().equals(castOther.getIsend())))
+				&& ((this.getMemo1() == castOther.getMemo1()) || (this
+						.getMemo1() != null && castOther.getMemo1() != null && this
+						.getMemo1().equals(castOther.getMemo1())))
+				&& ((this.getMemo2() == castOther.getMemo2()) || (this
+						.getMemo2() != null && castOther.getMemo2() != null && this
+						.getMemo2().equals(castOther.getMemo2())))
+				&& ((this.getMemo3() == castOther.getMemo3()) || (this
+						.getMemo3() != null && castOther.getMemo3() != null && this
+						.getMemo3().equals(castOther.getMemo3())))
+				&& ((this.getMemo4() == castOther.getMemo4()) || (this
+						.getMemo4() != null && castOther.getMemo4() != null && this
+						.getMemo4().equals(castOther.getMemo4())));
+	}
+
+	public int hashCode() {
+		int result = 17;
+
+		result = 37 * result + (getId() == null ? 0 : this.getId().hashCode());
+		result = 37 * result
+				+ (getParentId() == null ? 0 : this.getParentId().hashCode());
+		result = 37 * result
+				+ (getName() == null ? 0 : this.getName().hashCode());
+		result = 37 * result
+				+ (getIsend() == null ? 0 : this.getIsend().hashCode());
+		result = 37 * result
+				+ (getMemo1() == null ? 0 : this.getMemo1().hashCode());
+		result = 37 * result
+				+ (getMemo2() == null ? 0 : this.getMemo2().hashCode());
+		result = 37 * result
+				+ (getMemo3() == null ? 0 : this.getMemo3().hashCode());
+		result = 37 * result
+				+ (getMemo4() == null ? 0 : this.getMemo4().hashCode());
+		return result;
+	}
+
+}

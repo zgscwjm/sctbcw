@@ -1,0 +1,51 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.Teachstafftraininfo;
+
+@Repository
+public class TeachstafftraininfoDao {
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+
+	public List<Teachstafftraininfo> getTeachstafftraininfoAll() {
+		String hql = "from Teachstafftraininfo";
+		return hibernateTemplate.find(hql);
+	}
+	public boolean insertTeachstafftraininfo(
+			Teachstafftraininfo teachstafftraininfo) {
+		try {
+			hibernateTemplate.save(teachstafftraininfo);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean updateTeachstafftraininfo(
+			Teachstafftraininfo teachstafftraininfo) {
+		try {
+			hibernateTemplate.update(teachstafftraininfo);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean delTeachstafftraininfo(int teachstafftraininfoId) {
+		Teachstafftraininfo teachstafftraininfo = hibernateTemplate.get(
+				Teachstafftraininfo.class, teachstafftraininfoId);
+		try {
+			hibernateTemplate.delete(teachstafftraininfo);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+}

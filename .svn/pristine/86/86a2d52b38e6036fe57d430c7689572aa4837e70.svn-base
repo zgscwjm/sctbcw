@@ -1,0 +1,38 @@
+function Left() {
+}
+Left.prototype = {
+	deptinfo : function(path) {
+		window.location.href = path + "/DeptInfo/getDeptInfoAll";
+	},
+	teachStaffInfo : function(path) {
+		window.location.href = path + "/TeachStaffInfo/getTeachStaffInfoAll";
+	},
+	teachStaffEnlargeInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffEnlargeInfo/getTeachStaffEnlargeInfoAll";
+	},
+	teachStaffTrainInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffTrainInfo/getTeachStaffTrainInfoAll";
+	},
+	trainInfo : function(path) {
+		window.location.href = path + "/TrainInfo/getTrainInfoAll";
+	},
+	trainType : function(path) {
+		window.location.href = path + "/TrainType/getTrainTypeAll";
+	},
+	trainApply : function(path) {
+		window.location.href = path + "/TrainApply/getTrainApplyAll";
+	},
+	auditingOpinion : function(path) {
+		window.location.href = path + "/AuditingOpinion/getAuditingOpinionAll";
+	},
+	shortPeriodEstimate : function(path) {
+		window.location.href = path
+				+ "/ShortPeriodEstimate/getShortPeriodEstimateAll";
+	},
+	longPeriodEstimate:function(path){
+		window.location.href = path
+		+ "/LongPeriodEstimate/getLongPeriodEstimateAll";
+	}
+}

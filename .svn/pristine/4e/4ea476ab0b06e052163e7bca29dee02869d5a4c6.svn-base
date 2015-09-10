@@ -1,0 +1,11 @@
+package com.sctbc.constant;
+
+public class Common_TeachStaffInfo {
+	public static final String TEACHSTAFFINFO_GETTEACHSTAFFINFOALL = "/getTeachStaffInfoAll";
+	public static final String TEACHSTAFFINFO_ADDTEACHSTAFFINFO = "/addTeachStaffInfo";
+	public static final String TEACHSTAFFINFO_EDITTEACHSTAFFINFO = "/editTeachStaffInfo";
+	public static final String TECHSTAFFINFO_DELTEACHSTAFFINFO = "/delTeachStaffInfo";
+
+	public static final String TEACHSTAFFINFO_ADDTEACHSTAFFINFOINDEX = "/addTeachStaffInfoIndex";
+	public static final String TEACHSTAFFINFO_EDITTEACHSTAFFINFOINDEX = "/editTeachStaffInfoIndex";
+}

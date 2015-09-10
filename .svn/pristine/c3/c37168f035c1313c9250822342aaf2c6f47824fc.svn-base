@@ -1,0 +1,50 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.RolesPrivilegeId;
+
+@Repository
+public class RolesPrivilegeIdDao {
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+
+	public List<RolesPrivilegeId> getRolesPrivilegeIdAll() {
+		String hql = "from RolesPrivilegeId";
+		return hibernateTemplate.find(hql);
+	}
+
+	public boolean insertRolesPrivilegeId(RolesPrivilegeId rolesPrivilegeId) {
+		try {
+			hibernateTemplate.save(rolesPrivilegeId);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean updateRolesPrivilegeId(RolesPrivilegeId rolesPrivilegeId) {
+		try {
+			hibernateTemplate.update(rolesPrivilegeId);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean insertRolesPrivilegeId(int rolesPrivilegeIdId) {
+		RolesPrivilegeId rolesPrivilegeId = hibernateTemplate.get(
+				RolesPrivilegeId.class, rolesPrivilegeIdId);
+		try {
+			hibernateTemplate.delete(rolesPrivilegeId);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+}

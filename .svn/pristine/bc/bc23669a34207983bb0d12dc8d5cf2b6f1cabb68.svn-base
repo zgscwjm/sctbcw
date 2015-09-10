@@ -1,0 +1,15 @@
+package com.sctbc.server_i;
+
+import com.sctbc.entity.Teachstaffenlargeinfo;
+
+
+/**
+ * 教职工扩展信息表
+ * @author zgscwjm
+ *
+ */
+public interface ITeachStaffEnlargeInfo {
+
+	
+	public Teachstaffenlargeinfo addTeachstaffenlargeinfo();
+}

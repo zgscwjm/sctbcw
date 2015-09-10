@@ -1,0 +1,80 @@
+package com.sctbc.entity;
+
+/**
+ * Traintype entity. @author MyEclipse Persistence Tools
+ */
+
+public class Traintype implements java.io.Serializable {
+
+	// Fields
+
+	private Integer trainkindId;
+	private String kindName;
+	private Integer processKey;
+	private String memo1;
+	private String memo2;
+
+	// Constructors
+
+	/** default constructor */
+	public Traintype() {
+	}
+
+	/** minimal constructor */
+	public Traintype(String kindName, Integer processKey) {
+		this.kindName = kindName;
+		this.processKey = processKey;
+	}
+
+	/** full constructor */
+	public Traintype(String kindName, Integer processKey, String memo1,
+			String memo2) {
+		this.kindName = kindName;
+		this.processKey = processKey;
+		this.memo1 = memo1;
+		this.memo2 = memo2;
+	}
+
+	// Property accessors
+
+	public Integer getTrainkindId() {
+		return this.trainkindId;
+	}
+
+	public void setTrainkindId(Integer trainkindId) {
+		this.trainkindId = trainkindId;
+	}
+
+	public String getKindName() {
+		return this.kindName;
+	}
+
+	public void setKindName(String kindName) {
+		this.kindName = kindName;
+	}
+
+	public Integer getProcessKey() {
+		return this.processKey;
+	}
+
+	public void setProcessKey(Integer processKey) {
+		this.processKey = processKey;
+	}
+
+	public String getMemo1() {
+		return this.memo1;
+	}
+
+	public void setMemo1(String memo1) {
+		this.memo1 = memo1;
+	}
+
+	public String getMemo2() {
+		return this.memo2;
+	}
+
+	public void setMemo2(String memo2) {
+		this.memo2 = memo2;
+	}
+
+}

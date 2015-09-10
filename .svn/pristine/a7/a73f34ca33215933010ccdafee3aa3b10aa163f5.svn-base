@@ -1,0 +1,16 @@
+function Left() {
+}
+Left.prototype = {
+	deptinfo : function(path) {
+		window.location.href = path + "/DeptInfo/getDeptInfoAll";
+	},
+	teachStaffInfo : function(path) {
+		window.location.href=path+"/TeachStaffInfo/getTeachStaffInfoAll";
+	},
+	teachStaffEnlargeInfo:function(path){
+		window.location.href=path+"/TeachStaffEnlargeInfo/getTeachStaffEnlargeInfoAll";
+	},
+	teachStaffTrainInfo:function(path){
+		window.location.href=path+"/TeachStaffTrainInfo/getTeachStaffTrainInfoAll";
+	}
+}

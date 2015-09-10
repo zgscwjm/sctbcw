@@ -1,0 +1,270 @@
+package com.sctbc.entity;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+/**
+ * Traininfo entity. @author MyEclipse Persistence Tools
+ */
+
+public class Traininfo implements java.io.Serializable {
+
+	// Fields
+
+	private String releaseDep;
+	private Integer id;
+	private String projectId;
+	private String projectName;
+	private Date trainYear;
+	private Timestamp trainStartTime;
+	private Timestamp trainEndTime;
+	private String trainPlace;
+	private String trainCategory;
+	private Integer numberOfPeople;
+	private String trainWay;
+	private String trainContent;
+	private String trainPerson;
+	private String trainResult;
+	private Timestamp borrowTime;
+	private Double borrowBalance;
+	private Timestamp rbAmountTime;
+	private Double rbAmount;
+	private String costCompensated;
+	private String memo;
+	private String memo1;
+	private String memo2;
+
+	// Constructors
+
+	/** default constructor */
+	public Traininfo() {
+	}
+
+	/** minimal constructor */
+	public Traininfo(Integer id, String projectId, String projectName,
+			Date trainYear, String trainPlace, String trainCategory,
+			Integer numberOfPeople, String trainWay, String trainContent,
+			String trainPerson, String trainResult) {
+		this.id = id;
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.trainYear = trainYear;
+		this.trainPlace = trainPlace;
+		this.trainCategory = trainCategory;
+		this.numberOfPeople = numberOfPeople;
+		this.trainWay = trainWay;
+		this.trainContent = trainContent;
+		this.trainPerson = trainPerson;
+		this.trainResult = trainResult;
+	}
+
+	/** full constructor */
+	public Traininfo(Integer id, String projectId, String projectName,
+			Date trainYear, Timestamp trainStartTime, Timestamp trainEndTime,
+			String trainPlace, String trainCategory, Integer numberOfPeople,
+			String trainWay, String trainContent, String trainPerson,
+			String trainResult, Timestamp borrowTime, Double borrowBalance,
+			Timestamp rbAmountTime, Double rbAmount, String costCompensated,
+			String memo, String memo1, String memo2) {
+		this.id = id;
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.trainYear = trainYear;
+		this.trainStartTime = trainStartTime;
+		this.trainEndTime = trainEndTime;
+		this.trainPlace = trainPlace;
+		this.trainCategory = trainCategory;
+		this.numberOfPeople = numberOfPeople;
+		this.trainWay = trainWay;
+		this.trainContent = trainContent;
+		this.trainPerson = trainPerson;
+		this.trainResult = trainResult;
+		this.borrowTime = borrowTime;
+		this.borrowBalance = borrowBalance;
+		this.rbAmountTime = rbAmountTime;
+		this.rbAmount = rbAmount;
+		this.costCompensated = costCompensated;
+		this.memo = memo;
+		this.memo1 = memo1;
+		this.memo2 = memo2;
+	}
+
+	// Property accessors
+
+	public String getReleaseDep() {
+		return this.releaseDep;
+	}
+
+	public void setReleaseDep(String releaseDep) {
+		this.releaseDep = releaseDep;
+	}
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getProjectId() {
+		return this.projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProjectName() {
+		return this.projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public Date getTrainYear() {
+		return this.trainYear;
+	}
+
+	public void setTrainYear(Date trainYear) {
+		this.trainYear = trainYear;
+	}
+
+	public Timestamp getTrainStartTime() {
+		return this.trainStartTime;
+	}
+
+	public void setTrainStartTime(Timestamp trainStartTime) {
+		this.trainStartTime = trainStartTime;
+	}
+
+	public Timestamp getTrainEndTime() {
+		return this.trainEndTime;
+	}
+
+	public void setTrainEndTime(Timestamp trainEndTime) {
+		this.trainEndTime = trainEndTime;
+	}
+
+	public String getTrainPlace() {
+		return this.trainPlace;
+	}
+
+	public void setTrainPlace(String trainPlace) {
+		this.trainPlace = trainPlace;
+	}
+
+	public String getTrainCategory() {
+		return this.trainCategory;
+	}
+
+	public void setTrainCategory(String trainCategory) {
+		this.trainCategory = trainCategory;
+	}
+
+	public Integer getNumberOfPeople() {
+		return this.numberOfPeople;
+	}
+
+	public void setNumberOfPeople(Integer numberOfPeople) {
+		this.numberOfPeople = numberOfPeople;
+	}
+
+	public String getTrainWay() {
+		return this.trainWay;
+	}
+
+	public void setTrainWay(String trainWay) {
+		this.trainWay = trainWay;
+	}
+
+	public String getTrainContent() {
+		return this.trainContent;
+	}
+
+	public void setTrainContent(String trainContent) {
+		this.trainContent = trainContent;
+	}
+
+	public String getTrainPerson() {
+		return this.trainPerson;
+	}
+
+	public void setTrainPerson(String trainPerson) {
+		this.trainPerson = trainPerson;
+	}
+
+	public String getTrainResult() {
+		return this.trainResult;
+	}
+
+	public void setTrainResult(String trainResult) {
+		this.trainResult = trainResult;
+	}
+
+	public Timestamp getBorrowTime() {
+		return this.borrowTime;
+	}
+
+	public void setBorrowTime(Timestamp borrowTime) {
+		this.borrowTime = borrowTime;
+	}
+
+	public Double getBorrowBalance() {
+		return this.borrowBalance;
+	}
+
+	public void setBorrowBalance(Double borrowBalance) {
+		this.borrowBalance = borrowBalance;
+	}
+
+	public Timestamp getRbAmountTime() {
+		return this.rbAmountTime;
+	}
+
+	public void setRbAmountTime(Timestamp rbAmountTime) {
+		this.rbAmountTime = rbAmountTime;
+	}
+
+	public Double getRbAmount() {
+		return this.rbAmount;
+	}
+
+	public void setRbAmount(Double rbAmount) {
+		this.rbAmount = rbAmount;
+	}
+
+	public String getCostCompensated() {
+		return this.costCompensated;
+	}
+
+	public void setCostCompensated(String costCompensated) {
+		this.costCompensated = costCompensated;
+	}
+
+	public String getMemo() {
+		return this.memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getMemo1() {
+		return this.memo1;
+	}
+
+	public void setMemo1(String memo1) {
+		this.memo1 = memo1;
+	}
+
+	public String getMemo2() {
+		return this.memo2;
+	}
+
+	public void setMemo2(String memo2) {
+		this.memo2 = memo2;
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.sctbc.constant;
+
+public class Common_TrainApply {
+	public static final String TRAINAPPLY_GETTRAINAPPLY = "/getTrainApplyAll";
+	public static final String TRAINAPPLY_ADDTRAINAPPLY = "/addTrainApply";
+	public static final String TRAINAPPLY_EDITTRAINAPPLY = "/editTrainApply";
+	public static final String TRAINAPPLY_DELTRAINAPPLY = "/delTrainApply";
+
+	public static final String TRAINAPPLY_ADDTRAINAPPLYINDEX = "/addTrainApplyIndex";
+	public static final String TRAINAPPLY_EDITTRAINAPPLYINDEX = "/editTrainApplyIndex";
+}

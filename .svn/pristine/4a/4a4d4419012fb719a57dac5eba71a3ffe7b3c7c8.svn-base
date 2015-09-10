@@ -1,0 +1,66 @@
+package com.sctbc.servers_impl;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.RolesDao;
+import com.sctbc.entity.Roles;
+import com.sctbc.entity.RolesPrivilege;
+import com.sctbc.server_i.IRole;
+
+
+@Service
+public class RoleServer implements IRole {
+
+	
+	@Autowired
+	RolesDao rolesDao;
+	
+	@Override
+	public Roles getById(int id) {
+		// TODO Auto-generated method stub
+		return rolesDao.getRoles(id);
+	}
+
+	@Override
+	public List<Roles> getList() {
+		// TODO Auto-generated method stub
+		return rolesDao.getRolesAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return rolesDao.delRoles(id);
+	}
+
+	@Override
+	public boolean upData(Roles t) {
+		// TODO Auto-generated method stub
+		return rolesDao.updateRoles(t);
+	}
+
+	@Override
+	public boolean addRole(String memo1,String memo2,String roleName,RolesPrivilege rolesPrivileges) {
+		// TODO Auto-generated method stub
+		Roles roles=new Roles();
+		roles.setMemo1(memo1);
+		roles.setMemo2(memo2);
+		roles.setRoleName(roleName);
+		
+		Set<RolesPrivilege> set=new HashSet<RolesPrivilege>();
+		set.add(rolesPrivileges);
+		roles.setRolesPrivileges(set);
+		
+		return	rolesDao.insertRoles(roles);
+		
+	}
+	
+	
+
+}

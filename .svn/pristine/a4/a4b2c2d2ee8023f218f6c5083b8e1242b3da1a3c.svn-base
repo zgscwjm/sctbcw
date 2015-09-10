@@ -1,0 +1,39 @@
+package com.sctbc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_User;
+import com.sctbc.entity.User;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_USER_MODULE)
+public class UserController {
+	private boolean result;
+	@RequestMapping(value = Common_User.USER_GETUSERALL)
+	public String getUserAll(Model model) {
+		return "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_User.USER_INSERTUSER)
+	public String insertUserAll(Model model, User user) {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_User.USER_UPDATEUSER)
+	public String updateUserAll(Model model, User user) {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_User.USER_DELETEUSER)
+	public String deleteUserAll(Model model, int userid) {
+		return result + "";
+	}
+
+}

@@ -1,0 +1,34 @@
+package com.sctbc.entity;
+
+/**
+ * Procedure entity. @author MyEclipse Persistence Tools
+ */
+
+public class Procedure implements java.io.Serializable {
+
+	// Fields
+
+	private ProcedureId id;
+
+	// Constructors
+
+	/** default constructor */
+	public Procedure() {
+	}
+
+	/** full constructor */
+	public Procedure(ProcedureId id) {
+		this.id = id;
+	}
+
+	// Property accessors
+
+	public ProcedureId getId() {
+		return this.id;
+	}
+
+	public void setId(ProcedureId id) {
+		this.id = id;
+	}
+
+}

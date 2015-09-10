@@ -1,0 +1,9 @@
+package com.sctbc.server_i;
+
+import com.sctbc.entity.Teachstaffinfo;
+
+public interface ITeachStaffInfo {
+
+	
+	public Teachstaffinfo addTeachstaffinfo(String memo1,String memo2);
+}

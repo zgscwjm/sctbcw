@@ -1,0 +1,67 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.DeptinfoDao;
+import com.sctbc.entity.Deptinfo;
+import com.sctbc.server_i.IDeptInfo;
+
+@Service
+public class DeptInfoServer implements IDeptInfo{
+
+	
+	@Autowired
+	DeptinfoDao deptinfoDao;
+	
+	@Override
+	public Deptinfo getById(int id) {
+		// TODO Auto-generated method stub
+		return deptinfoDao.getDeptinfo(id);
+	}
+
+	@Override
+	public List<Deptinfo> getList() {
+		// TODO Auto-generated method stub
+		return deptinfoDao.getDeptinfoAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return deptinfoDao.delDeptinfo(id);
+	}
+
+	@Override
+	public boolean upData(Deptinfo t) {
+		// TODO Auto-generated method stub
+		return deptinfoDao.updateDeptinfo(t);
+	}
+
+	@Override
+	public boolean addDeptInfo(String depName,String depLeaderId) {
+		// TODO Auto-generated method stub
+		Deptinfo deptinfo=new Deptinfo();
+		deptinfo.setDepName(depName);
+		deptinfo.setDepLeaderId(depLeaderId);
+		return deptinfoDao.insertDeptinfo(deptinfo);
+	}
+
+	@Override
+	public boolean editDeptInfo(String id, String depName, String depLeaderId) {
+		// TODO Auto-generated method stub
+		Deptinfo deptinfo=this.getById(Integer.valueOf(id));
+		deptinfo.setDepName(depName);
+		deptinfo.setDepLeaderId(depLeaderId);
+		return this.upData(deptinfo);
+	}
+	
+	
+	
+
+	
+	
+	
+}

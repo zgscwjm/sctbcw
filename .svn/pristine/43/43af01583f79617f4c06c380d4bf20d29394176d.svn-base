@@ -1,0 +1,12 @@
+package com.sctbc.server_i;
+
+import com.sctbc.entity.Roles;
+import com.sctbc.entity.RolesPrivilege;
+
+public interface IRole extends IBaseServer<Roles>{
+	
+	
+	public boolean addRole(String memo1,String memo2,String roleName,RolesPrivilege rolesPrivileges);
+
+	
+}
