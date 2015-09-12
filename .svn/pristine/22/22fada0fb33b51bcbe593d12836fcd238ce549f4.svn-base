@@ -1,0 +1,76 @@
+package com.sctbc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_NewsType;
+import com.sctbc.entity.Newstype;
+import com.sctbc.server_i.INewsType;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_NEWSTYPE_MODULE)
+public class NewsTypeController {
+	private static final String LISTPATH = "/sctbc/Page/newsType/list";
+	private static final String ADDPATH = "/sctbc/Page/newsType/add";
+	private static final String EDITPATH = "/sctbc/Page/newsType/edit";
+
+	private static final String ENTITYNAME = "Newstype";
+
+	public boolean result = true;
+
+	@Autowired
+	INewsType iNewsType;
+
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_GETNEWSTYPEALL)
+	public String getNewsTypeAll(Model model, Integer page) {
+		int count = iNewsType.getCount(ENTITYNAME);
+		if (page == null || page.SIZE < 1) {
+			page = 1;
+		} else if (page > count / 6) {
+			page = count / 6 + 1;
+		}
+		List<Newstype> newsTypeList = iNewsType.getListFoPage(ENTITYNAME, page);
+		model.addAttribute("nowpage", page);
+		model.addAttribute("count", count);
+		model.addAttribute("newsTypeList", newsTypeList);
+		return LISTPATH;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_ADDNEWSTYPE)
+	public String addNewsTypeAll(Model model, Newstype newsType) {
+		result = iNewsType.addNewsType(newsType);
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_EDITNEWSTYPE)
+	public String editNewsType(Model model, Newstype newsType) {
+		result = iNewsType.upData(newsType);
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_DELNEWSTYPE)
+	public String delNewsType(Model model, int id) {
+		result = iNewsType.delById(id);
+		return result + "";
+	}
+
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_ADDNEWSTYPEINDEX)
+	public String addNewsTypeIndex() {
+		return ADDPATH;
+	}
+	@RequestMapping(value = Common_NewsType.NEWSTYPE_EDITNEWSTYPEINDEX)
+	public String editNewsTypeIndex(Model model, int id) {
+		Newstype newsType = iNewsType.getById(id);
+		model.addAttribute("newsType", newsType);
+		return EDITPATH;
+	}
+}

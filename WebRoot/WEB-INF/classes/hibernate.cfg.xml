@@ -12,8 +12,12 @@
 		<property name="connection.url">
 			jdbc:mysql://211.149.226.225:3306/trainmanagementinfomationsystem
 		</property>
+		<!-- <property name="connection.url">
+			jdbc:mysql://localhost:3306/trainmanagementinfomationsystem
+			</property> -->
 		<property name="connection.username">root</property>
 		<property name="connection.password">VncZdKey1asd</property>
+		<!-- <property name="connection.password">1qazxsw2</property> -->
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
@@ -22,6 +26,8 @@
 		<mapping resource="com/sctbc/entity/Dbback.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Deptinfo.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Longperiodestimate.hbm.xml" />
+		<mapping resource="com/sctbc/entity/Newstype.hbm.xml" />
+		<mapping resource="com/sctbc/entity/News.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Privilege.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Procedure.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Resource.hbm.xml" />
@@ -39,6 +45,7 @@
 		<mapping resource="com/sctbc/entity/Traininfo.hbm.xml" />
 		<mapping resource="com/sctbc/entity/Traintype.hbm.xml" />
 		<mapping resource="com/sctbc/entity/User.hbm.xml" />
+		
 
 	</session-factory>
 

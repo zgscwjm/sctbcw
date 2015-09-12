@@ -22,8 +22,11 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url"
 			value="jdbc:mysql://211.149.226.225:3306/trainmanagementinfomationsystem?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+			<!-- <property name="url"
+			value="jdbc:mysql://localhost:3306/trainmanagementinfomationsystem?useUnicode=true&amp;characterEncoding=UTF-8"></property> -->
 		<property name="username" value="root"></property>
 		<property name="password" value="VncZdKey1asd"></property>
+		<!-- <property name="password" value="1qazxsw2"></property> -->
 	</bean>
 
 	<bean id="sessionFactory"
@@ -34,6 +37,7 @@
 		<property name="hibernateProperties">
 			<props>
 			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			 <!-- <prop key="hibernate.show_sql">true</prop> -->
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -56,6 +60,8 @@
 	<value>com/sctbc/entity/Traininfo.hbm.xml</value>
 	<value>com/sctbc/entity/Traintype.hbm.xml</value>
 	<value>com/sctbc/entity/User.hbm.xml</value>
+	<value>com/sctbc/entity/Newstype.hbm.xml</value>
+	<value>com/sctbc/entity/News.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

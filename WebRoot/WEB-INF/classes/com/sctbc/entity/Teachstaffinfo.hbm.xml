@@ -10,7 +10,7 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="user" class="com.sctbc.entity.User" fetch="select" lazy="false">
+        <many-to-one name="user" class="com.sctbc.entity.User" fetch="select">
             <column name="userID" length="10" not-null="true" />
         </many-to-one>
         <property name="name" type="java.lang.String">

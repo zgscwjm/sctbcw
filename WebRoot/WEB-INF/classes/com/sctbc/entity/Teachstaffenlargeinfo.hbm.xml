@@ -13,9 +13,7 @@
         <many-to-one name="deptinfo" class="com.sctbc.entity.Deptinfo" fetch="select" lazy="false">
             <column name="depID" not-null="true" />
         </many-to-one>
-        <many-to-one name="user" class="com.sctbc.entity.User" update="false" insert="false" fetch="select" lazy="false">
-            <column name="userID" length="10" not-null="true" unique="true" />
-        </many-to-one>
+        <one-to-one name="user" class="com.sctbc.entity.User" constrained="true"></one-to-one>
         <property name="idnumber" type="java.lang.String">
             <column name="IDNumber" length="18" not-null="true" />
         </property>

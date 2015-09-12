@@ -10,17 +10,17 @@
             <column name="projectID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="traintype" class="com.sctbc.entity.Traintype" fetch="select">
+        <many-to-one name="deptinfo" class="com.sctbc.entity.Deptinfo" fetch="select" lazy="false">
+            <column name="releaseDep" not-null="true" />
+        </many-to-one>
+        <many-to-one name="traintype" class="com.sctbc.entity.Traintype" fetch="select" lazy="false">
             <column name="trainCategory" not-null="true" />
         </many-to-one>
-        <property name="releaseDep" type="java.lang.String">
-            <column name="releaseDep" length="10" not-null="true" />
-        </property>
         <property name="projectName" type="java.lang.String">
             <column name="projectName" length="20" not-null="true" />
         </property>
-        <property name="trainYear" type="java.util.Date">
-            <column name="trainYear" length="0" not-null="true" />
+        <property name="trainYear" type="java.lang.String">
+            <column name="trainYear" length="4" not-null="true" />
         </property>
         <property name="trainStartTime" type="java.sql.Timestamp">
             <column name="trainStartTime" length="19" />
@@ -70,25 +70,25 @@
         <property name="memo2" type="java.lang.String">
             <column name="memo2" length="20" />
         </property>
-        <set name="shortperiodestimates" inverse="true">
+        <set name="shortperiodestimates" inverse="true" lazy="false">
             <key>
                 <column name="projectID" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Shortperiodestimate" />
         </set>
-        <set name="trainapplies" inverse="true">
+        <set name="trainapplies" inverse="true" lazy="false">
             <key>
                 <column name="projectID" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Trainapply" />
         </set>
-        <set name="longperiodestimates" inverse="true">
+        <set name="longperiodestimates" inverse="true" lazy="false">
             <key>
                 <column name="projectID" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Longperiodestimate" />
         </set>
-        <set name="teachstafftraininfos" inverse="true">
+        <set name="teachstafftraininfos" inverse="true" lazy="false">
             <key>
                 <column name="projectID" not-null="true" />
             </key>

@@ -1,0 +1,71 @@
+function Left() {
+}
+Left.prototype = {
+		
+	//系统管理
+	user : function(path) {
+		window.location.href = path + "/User/getUserAll";
+	},
+	roles:function(path){
+		window.location.href = path +"/Roles/getRolesAll";
+	},
+	privilege:function(path){
+		window.location.href=path+"/Privilege/getPrivilegeAll";
+	},
+	resource:function(path){
+		window.location.href=path+"/Resource/getResourceAll";
+	},
+	sysLogin:function(path){
+		window.location.href=path+"/SysLogin/getSysLoginAll";
+	},
+	
+	
+	//***************************************************************************
+	//职工信息管理
+	deptinfo : function(path) {
+		window.location.href = path + "/DeptInfo/getDeptInfoAll";
+	},
+	teachStaffInfo : function(path) {
+		window.location.href = path + "/TeachStaffInfo/getTeachStaffInfoAll";
+	},
+	teachStaffEnlargeInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffEnlargeInfo/getTeachStaffEnlargeInfoAll";
+	},
+	
+	
+	
+	
+	//***************************************************************************
+	//培训信息管理
+	addTrainInfo:function(path){
+		window.location.href=path+"/TrainInfo/addTrainInfoIndex";
+	},
+	getTrainInfoAll:function(path){
+		window.location.href=path+"/TrainInfo/getTrainInfoAll";
+	},
+	teachStaffTrainInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffTrainInfo/getTeachStaffTrainInfoAll";
+	},
+	trainInfo : function(path) {
+		window.location.href = path + "/TrainInfo/getTrainInfoAll";
+	},
+	trainType : function(path) {
+		window.location.href = path + "/TrainType/getTrainTypeAll";
+	},
+	addtrainApply : function(type,path) {
+			window.location.href = path + "/TrainApply/addTrainApplyIndex?type="+type;
+	},
+	auditingOpinion : function(path) {
+		window.location.href = path + "/AuditingOpinion/getAuditingOpinionAll";
+	},
+	shortPeriodEstimate : function(path) {
+		window.location.href = path
+				+ "/ShortPeriodEstimate/getShortPeriodEstimateAll";
+	},
+	longPeriodEstimate : function(path) {
+		window.location.href = path
+				+ "/LongPeriodEstimate/getLongPeriodEstimateAll";
+	}
+}

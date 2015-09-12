@@ -1,0 +1,48 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.Newstype;
+
+@Repository
+public class NewsTypeDao extends BaseDao {
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+	public List<Newstype> getNewsTypeAll(){
+		String hql="from Newstype";
+		return hibernateTemplate.find(hql);
+	}
+	public boolean insertNewsType(Newstype newsType) {
+		try {
+			hibernateTemplate.save(newsType);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean updateNewsType(Newstype newsType) {
+		try {
+			hibernateTemplate.update(newsType);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean delNewsType(int id) {
+		Newstype newsType = hibernateTemplate.get(Newstype.class, id);
+		try {
+			hibernateTemplate.delete(newsType);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+}

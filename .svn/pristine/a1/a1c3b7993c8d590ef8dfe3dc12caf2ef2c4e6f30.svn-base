@@ -1,0 +1,52 @@
+package com.sctbc.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_News;
+import com.sctbc.entity.News;
+import com.sctbc.server_i.INews;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_NEWS_MODULE)
+public class NewsController {
+	public static final String LISTPATH = "";
+	public static final String ADDPATH = "";
+	public static final String EDITPATH = "";
+
+	@Autowired
+	INews iNews;
+
+	@RequestMapping(value = Common_News.NEWS_GETNEWSALL)
+	public String getNewsAll(Model model, Integer page) {
+		return "";
+	}
+
+	@RequestMapping(value = Common_News.NEWS_ADDNEWS)
+	public String addNews(Model model, News news, int newsTypeId) {
+		return "";
+	}
+
+	@RequestMapping(value = Common_News.NEWS_EDITNEWS)
+	public String editNews(Model model, News news, int newsTypeId) {
+		return "";
+	}
+
+	@RequestMapping(value = Common_News.NEWS_DELNEWS)
+	public String delNews(Model model, int newsId) {
+		return "";
+	}
+
+	@RequestMapping(value = Common_News.NEWS_ADDNEWSINDEX)
+	public String addNewsIndex(Model model) {
+		return "";
+	}
+
+	@RequestMapping(value = Common_News.NEWS_EDITNEWSINDEX)
+	public String editNewsIndex(Model model) {
+		return "";
+	}
+}

@@ -10,17 +10,17 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="privilege" class="com.sctbc.entity.Privilege" fetch="select">
+        <many-to-one name="privilege" class="com.sctbc.entity.Privilege" fetch="select" >
             <column name="privilegeID" not-null="true" />
         </many-to-one>
-        <many-to-one name="roles" class="com.sctbc.entity.Roles" fetch="select">
+        <many-to-one name="roles" class="com.sctbc.entity.Roles" fetch="select" >
             <column name="roleID" not-null="true" />
         </many-to-one>
         <property name="demo1" type="java.lang.String">
-            <column name="demo1" length="20" not-null="true" />
+            <column name="memo1" length="20" not-null="true" />
         </property>
         <property name="demo2" type="java.lang.String">
-            <column name="demo2" length="20" />
+            <column name="memo2" length="20" />
         </property>
     </class>
 </hibernate-mapping>

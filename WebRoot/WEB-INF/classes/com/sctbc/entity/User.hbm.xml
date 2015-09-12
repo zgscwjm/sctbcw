@@ -22,49 +22,44 @@
         <property name="memo2" type="java.lang.String">
             <column name="memo2" length="20" />
         </property>
-        <set name="trainapplies" inverse="true">
+        <set name="trainapplies" inverse="true" lazy="false">
             <key>
                 <column name="userID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Trainapply" />
         </set>
-        <set name="auditingopinions" inverse="true">
+        <set name="auditingopinions" inverse="true" lazy="false">
             <key>
                 <column name="auditingLeaderUserID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Auditingopinion" />
         </set>
-        <set name="longperiodestimatesForTrainUserId" inverse="true">
+        <set name="longperiodestimatesForTrainUserId" inverse="true" lazy="false">
             <key>
                 <column name="trainUserID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Longperiodestimate" />
         </set>
-        <set name="shortperiodestimatesForTrainUserId" inverse="true">
+        <set name="shortperiodestimatesForTrainUserId" inverse="true" lazy="false">
             <key>
                 <column name="trainUserID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Shortperiodestimate" />
         </set>
-        <set name="teachstaffenlargeinfos" inverse="true" lazy="false">
-            <key>
-                <column name="userID" length="10" not-null="true" unique="true" />
-            </key>
-            <one-to-many class="com.sctbc.entity.Teachstaffenlargeinfo" />
-        </set>
-        <set name="shortperiodestimatesForEvaluateUserId" inverse="true">
+        <one-to-one name="teachstaffenlargeinfo" class="com.sctbc.entity.Teachstaffenlargeinfo"></one-to-one>
+        <set name="shortperiodestimatesForEvaluateUserId" inverse="true" lazy="false">
             <key>
                 <column name="evaluateUserID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Shortperiodestimate" />
         </set>
-        <set name="longperiodestimatesForEvaluateUserId" inverse="true">
+        <set name="longperiodestimatesForEvaluateUserId" inverse="true" lazy="false">
             <key>
                 <column name="evaluateUserID" length="10" not-null="true" />
             </key>
             <one-to-many class="com.sctbc.entity.Longperiodestimate" />
         </set>
-        <set name="teachstafftraininfos" inverse="true">
+        <set name="teachstafftraininfos" inverse="true" lazy="false">
             <key>
                 <column name="userID" length="10" not-null="true" />
             </key>

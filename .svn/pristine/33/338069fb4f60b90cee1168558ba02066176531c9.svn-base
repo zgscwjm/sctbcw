@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	 http://www.springframework.org/schema/security
+	 http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+
+	<!-- <mvc:resources location="/sctbc/css/" mapping="/sctbc/css/**"/> <mvc:resources 
+		location="/sctbc/assets/" mapping="/sctbc/assets/**"/> <mvc:resources location="/sctbc/img/" 
+		mapping="/sctbc/img/**"/> <mvc:resources location="/sctbc/js/" mapping="/sctbc/js/**"/> 
+		<mvc:resources location="/sctbc/Page/" mapping="/sctbc/Page/**"/> <mvc:resources 
+		location="/DeptInfo/" mapping="/DeptInfo/**"/> <mvc:resources location="/Upload/" 
+		mapping="/Upload/**"/> -->
+
+
+	<http security="none" pattern="/sctbc/css/**" />
+	<http security="none" pattern="/sctbc/assets/**" />
+	<http security="none" pattern="/sctbc/img/**" />
+	<http security="none" pattern="/sctbc/js/**" />
+	<http security="none" pattern="/sctbc/Page/**" />
+	<http security="none" pattern="/DeptInfo/**" />
+	<http security="none" pattern="/User/loginUser" />
+	<http auto-config="true" use-expressions="true">
+
+
+		<!-- url权限拦截 -->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
+		<!-- 登陆设置 -->
+		<form-login login-page="/User/loginUser"
+			default-target-url="/sctbc/Page/index.jsp" username-parameter="username"
+			password-parameter="password" authentication-success-handler-ref="loginsuccess" />
+
+
+		<!-- 退出设置 -->
+		<logout invalidate-session="true" logout-url="/logout"
+			logout-success-url="/User/loginUser" />
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="myUserDetailsServer">
+			<password-encoder ref="passwordEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<beans:bean id="loginsuccess" class="com.sctbc.security.LoginSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/Index/index" />
+	</beans:bean>
+	<beans:bean id="myUserDetailsServer" class="com.sctbc.security.myUserDetailsService" />
+
+</beans:beans>

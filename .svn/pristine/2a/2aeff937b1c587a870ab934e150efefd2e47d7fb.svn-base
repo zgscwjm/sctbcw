@@ -1,0 +1,59 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.NewsTypeDao;
+import com.sctbc.entity.Newstype;
+import com.sctbc.server_i.INewsType;
+
+@Service
+public class NewsTypeServer implements INewsType {
+
+	@Autowired
+	NewsTypeDao newsTypeDao;
+	@Override
+	public Newstype getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Newstype> getList() {
+		// TODO Auto-generated method stub
+		return newsTypeDao.getNewsTypeAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return newsTypeDao.delNewsType(id);
+	}
+
+	@Override
+	public boolean upData(Newstype t) {
+		// TODO Auto-generated method stub
+		return newsTypeDao.updateNewsType(t);
+	}
+
+	@Override
+	public List<Newstype> getListFoPage(String EntityName, Integer nowpage) {
+		// TODO Auto-generated method stub
+		return newsTypeDao.getListFoPage(EntityName, nowpage);
+	}
+
+	@Override
+	public Integer getCount(String EntityName) {
+		// TODO Auto-generated method stub
+		return newsTypeDao.getCount(EntityName);
+	}
+
+	@Override
+	public boolean addNewsType(Newstype newsType) {
+		// TODO Auto-generated method stub
+		return newsTypeDao.insertNewsType(newsType);
+	}
+
+}

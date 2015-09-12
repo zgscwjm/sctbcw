@@ -31,5 +31,11 @@
             </key>
             <one-to-many class="com.sctbc.entity.Teachstaffenlargeinfo" />
         </set>
+        <set name="traininfos" inverse="true" lazy="false">
+            <key>
+                <column name="releaseDep" not-null="true" />
+            </key>
+            <one-to-many class="com.sctbc.entity.Traininfo" />
+        </set>
     </class>
 </hibernate-mapping>

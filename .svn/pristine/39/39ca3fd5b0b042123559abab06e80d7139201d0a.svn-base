@@ -1,0 +1,108 @@
+package com.sctbc.security;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.sctbc.entity.RolesPrivilege;
+import com.sctbc.servers_impl.UserServer;
+
+public class myUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	UserServer userServer;
+	
+	private 	UserDetails userDetails=null;
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		System.out.println("username:"+username);
+	
+		com.sctbc.entity.User myUser=userServer.getById(username);
+		if(myUser!=null)
+		{
+		
+		 Set<RolesPrivilege> mySet=myUser.getRoles().getRolesPrivileges();
+			
+		 
+		 List<GrantedAuthority> list=new ArrayList<GrantedAuthority>();
+			list.add(new GrantedAuthorityImpl("ROLE_USER"));
+//			'1','系统管理','系统管理','',NULL
+//			'2','职工信息管理','职工信息管理','',NULL
+//			'3','培训信息管理','培训信息管理','',NULL
+//			'4','部门申请培训','部门申请培训','',NULL
+//			'5','评价管理','评价管理','',NULL
+//			'6','查询统计','查询统计','',NULL
+//			'9','培训流程管理','培训流程管理','',NULL
+//			'11','培训审核','培训审核','',NULL
+//			'12','委派培训','委派培训','',NULL
+//			'13','查看个人信息','查看个人信息','',NULL
+//			'14','个人申请培训','个人申请培训','',NULL
+
+		 	for (RolesPrivilege rolesPrivilege : mySet) {
+				switch (rolesPrivilege.getPrivilege().getPrivilegeId()) {
+				case 1:
+					list.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+					break;
+				case 2:
+					list.add(new GrantedAuthorityImpl("ROLE_TWO"));
+					break;
+				case 3:
+					list.add(new GrantedAuthorityImpl("ROLE_THREE"));
+					break;
+				case 4:
+					list.add(new GrantedAuthorityImpl("ROLE_FOUR"));
+					break;
+				case 5:
+					list.add(new GrantedAuthorityImpl("ROLE_FIVE"));
+					break;
+				case 6:
+					list.add(new GrantedAuthorityImpl("ROLE_SIX"));
+					break;
+				case 7:  
+					list.add(new GrantedAuthorityImpl("ROLE_SEVEN"));
+					break;
+				case 8:
+					list.add(new GrantedAuthorityImpl("ROLE_EIGHT"));
+					break;
+				case 9:
+					list.add(new GrantedAuthorityImpl("ROLE_NINE"));
+					break;
+				case 10:
+					list.add(new GrantedAuthorityImpl("ROLE_TEN"));
+					break;
+				case 11:
+					list.add(new GrantedAuthorityImpl("ROLE_ELEVEN"));
+					break;
+				case 12:
+					list.add(new GrantedAuthorityImpl("ROLE_TWELVE"));
+					break;
+				case 13:
+					list.add(new GrantedAuthorityImpl("ROLE_THIRTEEN"));
+					break;
+				case 14:
+					list.add(new GrantedAuthorityImpl("ROLE_FOURTEEN"));
+					break;
+				
+				default:
+					break;
+				}
+			}
+		 
+			
+			userDetails=new User(myUser.getUserId(), myUser.getPassword(), list);
+		}
+		return userDetails;
+	}
+
+}
