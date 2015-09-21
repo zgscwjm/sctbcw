@@ -1,0 +1,17 @@
+package com.sctbc.server_i;
+
+import java.util.List;
+import java.util.Map;
+
+public interface IReviewTrain {
+
+	
+	/**
+	 * 通过申请培训记录的id得到该培训条目的流程
+	 * @param id
+	 * @return 流程list(map(string,string)) key=name,proId,value
+	 * 
+	 */
+	public List<Map<String, String>> getProcedure(int id);
+	
+}

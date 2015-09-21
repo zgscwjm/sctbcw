@@ -1,0 +1,54 @@
+var curWwwPath = window.document.location.href;
+var pathName = window.document.location.pathname;
+var pos = curWwwPath.indexOf(pathName);
+var localhostPaht = curWwwPath.substring(0, pos);
+var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+var path = localhostPaht + projectName;
+
+var procedure = new Procedure();
+
+$(function() {
+	$("#add_sub").click(function(){
+		var depidarray = $(".tzboy").sortable("toArray");
+		var procedurename =$("#procedurename").val();
+		var deplength=depidarray.length;
+		var depnamearray = new Array([deplength-1]);
+		
+		for(var i=0;i<deplength;i++){
+			depnamearray[i] = $("#"+depidarray[i]).text();
+		}
+		procedure.add(depidarray, depnamearray, procedurename,path);
+	});
+	$("#see_btn").live("click",function(){
+		var id=$(this).attr("dataid");
+		procedure.see(id,path);
+	});
+	$(".tzboy").sortable({
+		cursor:"move",
+		items:"label",
+		opacity:0.6,
+		revert:true,
+		update:function(event,ui){
+			alert($(this).sortable("toArray"));
+		}
+	});
+	$("#append_btn")
+			.click(
+					function() {
+						var depId = $("#appendname").val();
+						var depName = $("#appendname").find("option:selected")
+								.text();
+						var html = "";
+						if (depId != "" && depId != null) {
+							html += '<label class="col-sm-2 col-sm-2 control-label tzvalue" id="'
+									+ depId
+									+ '">'
+									+ depName
+									+ '<img src="'
+									+ path
+									+ '/sctbc/img/jt.png" style="width:auto;" /></label>';
+							$("#tzboy").append(html);
+						}
+					});
+
+});

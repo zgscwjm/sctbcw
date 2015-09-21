@@ -1,0 +1,97 @@
+package com.sctbc.servers_impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.ProcedureDao;
+import com.sctbc.entity.Procedure;
+import com.sctbc.server_i.IProcedure;
+@Service
+public class ProcedureServer implements IProcedure {
+
+	@Autowired
+	ProcedureDao procedureDao;
+	@Override
+	public Procedure getProcedureById(int id) {
+		// TODO Auto-generated method stub
+		return procedureDao.getProcedureById(id);
+	}
+	
+	
+	
+	
+	@Override
+	public boolean addProced(ArrayList<Map<String, String>> list,String prodcutName) {
+		// TODO Auto-generated method stub
+		
+		if(list.size()>0)
+		{
+			Procedure procedure=new Procedure();
+			procedure.setParentId(-1);
+			procedure.setName(prodcutName);
+			procedure.setIsend(0);
+			Procedure perent=procedureDao.addProceducre(procedure);
+			for (Map<String, String> map : list) {
+				 procedure=new Procedure();
+				 procedure.setParentId(perent.getId());
+				 procedure.setIsend(0);
+				 procedure.setName(map.get("name"));
+				 procedure.setMemo3(map.get("value"));
+				 perent=procedureDao.addProceducre(procedure);
+			}
+			procedure=new Procedure();
+			procedure.setParentId(perent.getId());
+			procedure.setName(prodcutName);
+			procedure.setIsend(1);
+			procedureDao.addProceducre(procedure);
+		}
+		
+		return false;
+	}
+
+
+
+
+	@Override
+	public ArrayList<Map<String, String>> getProcedItemByFirstId(int id) {
+		// TODO Auto-generated method stub
+		Procedure procedure=null;
+		HashMap<String, String> hashmap=null;
+		ArrayList<Map<String, String>> list=new ArrayList<Map<String,String>>();
+		procedure=procedureDao.getProcedureById(id);
+		hashmap=new HashMap<String, String>();
+		
+		hashmap.put("name", procedure.getName());
+		hashmap.put("proId",new String().valueOf(procedure.getId()));
+		hashmap.put("value",procedure.getMemo3());
+		list.add(hashmap);
+		if(procedure!=null)
+		{
+			do{
+				procedure=procedureDao.getProcedureByParentId(procedure.getParentId());
+				hashmap.put("name", procedure.getName());
+				hashmap.put("proId",new String().valueOf(procedure.getId()));
+				hashmap.put("value",procedure.getMemo3());
+				list.add(hashmap);
+			}while (procedure.getIsend()!=1);
+		}
+		return list;
+	}
+
+
+
+
+	@Override
+	public Procedure getNextProcedureById(int id) {
+		// TODO Auto-generated method stub
+		procedureDao.getProcedureByParentId(id);
+		return null;
+	}
+	
+	
+	
+}

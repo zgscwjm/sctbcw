@@ -17,7 +17,7 @@
             <column name="roleID" not-null="true" />
         </many-to-one>
         <property name="demo1" type="java.lang.String">
-            <column name="memo1" length="20" not-null="true" />
+            <column name="memo1" length="20" not-null="false" />
         </property>
         <property name="demo2" type="java.lang.String">
             <column name="memo2" length="20" />

@@ -10,14 +10,14 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="userByEvaluateUserId" class="com.sctbc.entity.User" fetch="select">
-            <column name="evaluateUserID" length="10" not-null="true" />
+        <many-to-one name="userByEvaluateUserId" class="com.sctbc.entity.User" fetch="select" lazy="false">
+            <column name="evaluateUserID" length="12" not-null="true" />
         </many-to-one>
-        <many-to-one name="traininfo" class="com.sctbc.entity.Traininfo" fetch="select">
+        <many-to-one name="traininfo" class="com.sctbc.entity.Traininfo" fetch="select" lazy="false">
             <column name="projectID" not-null="true" />
         </many-to-one>
-        <many-to-one name="userByTrainUserId" class="com.sctbc.entity.User" fetch="select">
-            <column name="trainUserID" length="10" not-null="true" />
+        <many-to-one name="userByTrainUserId" class="com.sctbc.entity.User" fetch="select" lazy="false">
+            <column name="trainUserID" length="12" not-null="true" />
         </many-to-one>
         <property name="viewChange" type="java.lang.String">
             <column name="viewChange" length="10" not-null="true" />

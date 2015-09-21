@@ -1,0 +1,26 @@
+function Procedure(){
+	
+}
+Procedure.prototype={
+		add:function(depIdArray,depNameArray,procedureName){
+			$.ajax({
+                cache: true,
+                type: "post",
+                url:path+"/Procedure/addProcedure",
+                data:{depIdArray:depIdArray,depNameArray:depNameArray,procedureName:procedureName},
+                async: false,
+                error: function(request) {
+                    alert("Connection error");
+                },
+                success: function(data) {
+                    if(data){
+                    	alert("操作成功！页面将自动跳转…………");
+                    	setTimeout(function(){window.location.href=path+"/Procedure/getProcedureAll"}, "1000");
+                    }
+                    else{
+                    	alert("操作失败！");
+                    }
+                }
+            });
+		}
+}

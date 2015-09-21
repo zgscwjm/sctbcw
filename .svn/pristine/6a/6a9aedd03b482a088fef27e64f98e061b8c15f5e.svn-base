@@ -1,0 +1,47 @@
+package com.sctbc.server_i;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.sctbc.entity.Procedure;
+
+public interface IProcedure {
+	/**
+	 * 得到流程单条记录
+	 *
+	 * @param id
+	 * @return
+	 */
+	public Procedure getProcedureById(int id);
+
+	public List<Procedure> getProcedureAll();
+
+	/**
+	 * 添加整条流程记录
+	 *
+	 * @param list
+	 * @param producName
+	 * @return
+	 */
+	public boolean addProced(ArrayList<Map<String, String>> list,String producName);
+
+
+
+	/**
+	 * 得到整体流程记录
+	 *
+	 * @param id
+	 *            首条流程的id
+	 * @return 一个list数组..map(string,string)
+	 */
+	public ArrayList<Map<String, String>> getProcedItemByFirstId(int id);
+
+
+	/**
+	 * 通过当前流程条目的id得到下一个流程的对象
+	 *
+	 * @return 下个流程条目的对象
+	 */
+	public Procedure getNextProcedureById(int id);
+}

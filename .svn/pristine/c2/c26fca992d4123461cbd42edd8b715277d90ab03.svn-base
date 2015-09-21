@@ -1,0 +1,15 @@
+package com.sctbc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sctbc.constant.Common_Base;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_REVIEWTRAIN_MODULE)
+public class ReviewTrainController {
+
+	
+	
+	
+}

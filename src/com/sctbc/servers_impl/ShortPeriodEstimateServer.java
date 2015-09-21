@@ -1,0 +1,83 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.ShortperiodestimateDao;
+import com.sctbc.dao.UserDao;
+import com.sctbc.entity.Shortperiodestimate;
+import com.sctbc.entity.Traininfo;
+import com.sctbc.entity.User;
+import com.sctbc.server_i.IShortPeriodEstimate;
+
+@Service
+public class ShortPeriodEstimateServer implements IShortPeriodEstimate {
+
+	@Autowired
+	ShortperiodestimateDao shortPeriodEstimateDao;
+	@Autowired
+	UserDao userDao;
+	@Override
+	public Shortperiodestimate getById(int id) {
+		// TODO Auto-generated method stub
+		return shortPeriodEstimateDao.getShortperiodestimateById(id);
+	}
+
+	@Override
+	public List<Shortperiodestimate> getList() {
+		// TODO Auto-generated method stub
+		return shortPeriodEstimateDao.getShortperiodestimateAll();
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean upData(Shortperiodestimate t) {
+		// TODO Auto-generated method stub
+		return shortPeriodEstimateDao.updateShortperiodestimate(t);
+	}
+
+	@Override
+	public List<Shortperiodestimate> getListFoPage(String EntityName,
+			Integer nowpage, String searchname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getCount(String EntityName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean addShortPeriodEstimate(
+			Shortperiodestimate shortPeriodEstimate) {
+		// TODO Auto-generated method stub
+		return shortPeriodEstimateDao
+				.insertShortperiodestimate(shortPeriodEstimate);
+	}
+
+	@Override
+	public List<Shortperiodestimate> getShortperiodestimateBytrainUserID(
+			String userid) {
+		// TODO Auto-generated method stub
+		User user = userDao.getUserById(userid);
+		return shortPeriodEstimateDao.getShortperiodestimateBytrainUserID(user);
+	}
+
+	@Override
+	public List<Shortperiodestimate> getDepShortperiodestimateAllIHas(
+			User Euser, User Tuser, Traininfo traininfo) {
+		// TODO Auto-generated method stub
+		return shortPeriodEstimateDao.getDepShortperiodestimateAllIHas(Euser,
+				Tuser, traininfo);
+	}
+
+}

@@ -17,23 +17,36 @@
 		mapping="/Upload/**"/> -->
 
 
-	<http security="none" pattern="/sctbc/css/**" />
-	<http security="none" pattern="/sctbc/assets/**" />
-	<http security="none" pattern="/sctbc/img/**" />
-	<http security="none" pattern="/sctbc/js/**" />
-	<http security="none" pattern="/User/loginUser" />
-	<http auto-config="true" use-expressions="true">
+	
+	<http security="none" pattern="/sctbc/css/**" disable-url-rewriting="true"/>
+	<http security="none" pattern="/sctbc/assets/**" disable-url-rewriting="true"/>
+	<http security="none" pattern="/sctbc/img/**" disable-url-rewriting="true"/>
+	<http security="none" pattern="/sctbc/js/**" disable-url-rewriting="true"/>
+	<http security="none" pattern="/User/loginUser" disable-url-rewriting="true"/>
+	<http auto-config="true" use-expressions="true" disable-url-rewriting="true">
 
+<!-- //			'2','职工信息管理','职工信息管理','',NULL
+//			'3','培训信息管理','培训信息管理','',NULL
+//			'4','部门申请培训','部门申请培训','',NULL
+//			'5','评价管理','评价管理','',NULL
+//			'6','查询统计','查询统计','',NULL
+//			'9','培训流程管理','培训流程管理','',NULL
+//			'11','培训审核','培训审核','',NULL
+//			'12','委派培训','委派培训','',NULL
+//			'13','查看个人信息','查看个人信息','',NULL
+//			'14','个人申请培训','个人申请培训','',NULL -->
 
 		<!-- url权限拦截 -->
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+				<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		
 
 
 		<!-- 登陆设置 -->
 		<form-login login-page="/User/loginUser"
 			default-target-url="/sctbc/Page/index.jsp" username-parameter="username"
-			password-parameter="password" authentication-success-handler-ref="loginsuccess" />
+			password-parameter="password" authentication-success-handler-ref="loginsuccess" 
+		
+			/>
 
 
 		<!-- 退出设置 -->

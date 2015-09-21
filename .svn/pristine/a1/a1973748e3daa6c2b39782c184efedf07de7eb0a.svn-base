@@ -1,0 +1,29 @@
+var curWwwPath = window.document.location.href;
+var pathName = window.document.location.pathname;
+var pos = curWwwPath.indexOf(pathName);
+var localhostPaht = curWwwPath.substring(0, pos);
+var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+var path = localhostPaht + projectName;
+
+$(function() {
+	$(".tzboy").sortable({
+		cursor : "move",
+		items : "label", // 只是li可以拖动
+		opacity : 0.6, // 拖动时，透明度为0.6
+		revert : true, // 释放时，增加动画
+		update : function(event, ui) { // 更新排序之后
+			alert($(this).sortable("toArray"));
+		}
+	});
+	$("#append_btn")
+			.click(
+					function() {
+						var appendname = $("#appendname").val();
+						var html = "";
+						var id=parseInt($("#tzboy").children().size());
+						if (appendname != "" && appendname != null) {
+							html += '<label class="col-sm-2 col-sm-2 control-label tzvalue" id="'+(id+1)+'">'+appendname+'<img src="'+path+'/sctbc/img/jt.png" style="width:auto;" /></label>';
+							$("#tzboy").append(html);
+						}
+					});
+});

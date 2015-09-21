@@ -17,10 +17,12 @@
             <column name="description" length="254" not-null="true" />
         </property>
         <property name="demo1" type="java.lang.String">
-            <column name="demo1" length="20" />
+            <column name="memo1" length="20" />
         </property>
-        <property name="demo2" type="java.lang.String">
-            <column name="demo2" length="20" />
+        
+        <!-- //should be mapped with insert="false" update="false" -->
+        <property name="demo2" type="java.lang.String" >
+            <column name="memo2" length="20" />
         </property>
         <set name="resources" inverse="true">
             <key>

@@ -1,0 +1,22 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.PrivilegeDao;
+import com.sctbc.entity.Privilege;
+
+@Service
+public class PrivilegeServer {
+
+	@Autowired
+	public PrivilegeDao privilegeDao;
+	
+	public List<Privilege> getAllPrivilge()
+	{
+		return privilegeDao.getPrivilegeAll();
+	}
+	
+}

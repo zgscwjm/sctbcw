@@ -1,0 +1,44 @@
+package com.sctbc.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sctbc.constant.Common_AuditingOpinion;
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_ReviewTrain;
+import com.sctbc.entity.User;
+import com.sctbc.server_i.IDeptInfo;
+import com.sctbc.server_i.IReviewTrain;
+import com.sctbc.servers_impl.DeptInfoServer;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_REVIEWTRAIN_MODULE)
+public class ReviewTrainController {
+
+	private static final String LISTPATH = "/sctbc/Page/Review/list";
+
+	
+	@Autowired
+	IDeptInfo iDeptInfo;
+	
+	@Autowired
+	IReviewTrain iReviewTrain;
+	
+	
+	@RequestMapping(value=Common_ReviewTrain.REVIEWTRAIN_GETREVIEWTRAINALL)
+	public String getReviewAll(HttpSession session,Model model) {
+		
+		User user=(User) session.getAttribute("USER");
+		if(iDeptInfo.isLeader(user))
+		{
+			model.addAttribute("reviewlist",iReviewTrain.getNeedReviewByUser(user));
+		}
+			
+		return LISTPATH;
+	}
+	
+}

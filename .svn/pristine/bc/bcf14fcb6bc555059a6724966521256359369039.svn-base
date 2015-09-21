@@ -1,0 +1,94 @@
+package com.sctbc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_TrainInfo;
+import com.sctbc.entity.Deptinfo;
+import com.sctbc.entity.Traininfo;
+import com.sctbc.entity.Traintype;
+import com.sctbc.server_i.IDeptInfo;
+import com.sctbc.server_i.ITrainInfo;
+import com.sctbc.server_i.ITrainType;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_TRAININFO_MODULE)
+public class TrainInfoController {
+	private static final String LISTPATH = "/sctbc/Page/trainInfo/list";
+	private static final String ADDPATH = "/sctbc/Page/trainInfo/add";
+	private static final String EDITPATH = "/sctbc/Page/trainInfo/edit";
+	private static final String ONEPATH = "/sctbc/Page/trainInfo/one";
+
+	private final boolean result = true;
+
+	@Autowired
+	IDeptInfo iDeptInfo;
+	@Autowired
+	ITrainType iTrainType;
+	@Autowired
+	ITrainInfo iTrainInfo;
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_GETTRAININFOALL)
+	public String getTrainInfoAll(Model model) {
+		List<Traininfo> trainInfoList = iTrainInfo.getTraininfoList();
+		model.addAttribute("trainInfoList", trainInfoList);
+		return LISTPATH;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_ADDTEAININFO)
+	public String addTrainInfo(Model model, Traininfo trainInfo,
+			int trainkindId, int releaseDep) {
+
+		Traintype trainType = iTrainType.getTraintypeById(trainkindId);
+		Deptinfo deptInfo = iDeptInfo.getById(releaseDep);
+
+		trainInfo.setTraintype(trainType);
+		trainInfo.setDeptinfo(deptInfo);
+		boolean result = iTrainInfo.addTraininfo(trainInfo);
+
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_EDITTRAININFO)
+	public String editTrainInfo() {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_DELTRAININFO)
+	public String delTrainInfo() {
+		return result + "";
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_ADDTRAININFOINDEX)
+	public String addTrainInfoIndex(Model model) {
+		List<Deptinfo> deptInfoList = iDeptInfo.getList();
+		List<Traintype> trainTypeList = iTrainType.getTrainTypeList();
+
+		model.addAttribute("deptInfolist", deptInfoList);
+		model.addAttribute("trainTypelist", trainTypeList);
+
+		return ADDPATH;
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_EDITTRAININFOINDEX)
+	public String editTrainInfoIndex() {
+		return EDITPATH;
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_SEETRAININFOBYONE)
+	public String seeTrainInfoByOne(Model model, int id) {
+		Traininfo trainInfo = iTrainInfo.getTraininfoById(id);
+		model.addAttribute("trainInfo", trainInfo);
+		return ONEPATH;
+	}
+
+}

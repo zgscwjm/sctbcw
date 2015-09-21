@@ -1,0 +1,31 @@
+package com.sctbc.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_Index;
+import com.sctbc.entity.News;
+import com.sctbc.servers_impl.NewsServer;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_INDEX_MODULE)
+public class IndexController {
+	private static final String INDEXPATH = "/sctbc/Page/index";
+
+	
+	private static final String newsEntityName = "News";
+	@Autowired 
+	NewsServer newsServer;
+	
+	@RequestMapping(Common_Index.INDEX_INDEX)
+	public String index(Model model) {
+		
+		
+		int count=newsServer.getCount(newsEntityName);
+		model.addAttribute("newslist", newsServer.getListFoPage(newsEntityName, 1)); 
+		return INDEXPATH;
+	}
+}

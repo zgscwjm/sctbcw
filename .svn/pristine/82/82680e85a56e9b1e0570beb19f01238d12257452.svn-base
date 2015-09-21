@@ -1,0 +1,58 @@
+package com.sctbc.servers_impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sctbc.dao.AuditingopinionDao;
+import com.sctbc.dao.TrainapplyDao;
+import com.sctbc.entity.Auditingopinion;
+import com.sctbc.entity.Trainapply;
+import com.sctbc.server_i.IReviewTrain;
+
+public class ReviewTrainServer implements IReviewTrain {
+
+	@Autowired
+	TrainapplyDao trainapplyDao;
+	
+	@Autowired 
+	ProcedureServer procedureServer;
+	
+	@Autowired
+	AuditingopinionDao auditingopinionDao;
+
+	
+	
+	public List<Map<String, String>> getProcedure(int id) {
+		Trainapply trainapply = trainapplyDao.getTrainapplyById(id);
+		int procedureId = trainapply.getTraininfo().getTraintype()
+				.getTrainkindId();
+		
+		 return  procedureServer.getProcedItemByFirstId(procedureId);
+	}
+	
+	
+	
+	public 	List<Auditingopinion> getAuditingopinionList(Trainapply trainapply)
+	{
+		
+		return auditingopinionDao.getAuditItem(trainapply);
+	}
+	
+	
+	public void check(int id)
+	{
+		List<Map<String, String>> proceduceList=this.getProcedure(id);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,155 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>四川工商职业技术学院</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+</head>
+
+<body>
+	<div id="sidebar" class="nav-collapse ">
+		<!-- sidebar menu start-->
+		<ul class="sidebar-menu" id="nav-accordion">
+			<c:forEach items="${USER.teachstaffinfos}" var="userinfo">
+				<h5 class="centered">
+					<p>${userinfo.name }</p>
+				</h5>
+				<p class="centered">教工编号：${USER.userId }</p>
+				<c:if
+					test="${USER.teachstaffenlargeinfo.deptinfo.depName==null||USER.teachstaffenlargeinfo.deptinfo.depName=='' }">
+					<p class="centered">
+						所在部门：<font color="red"><a
+							href="<%=path%>/TeachStaffEnlargeInfo/editTeachStaffEnlargeInfoIndex/${USER.userId}">请编辑扩展信息</a></font>
+					</p>
+				</c:if>
+				<c:if
+					test="${USER.teachstaffenlargeinfo.deptinfo.depName!=null&&USER.teachstaffenlargeinfo.deptinfo.depName!='' }">
+					<p class="centered">所在部门：${USER.teachstaffenlargeinfo.deptinfo.depName }</p>
+				</c:if>
+			</c:forEach>
+			<li class="sub-menu"><a href="javascript:;" id="index"> <i
+					class="fa fa-th"></i> <span>首页</span>
+			</a></li>
+			<sec:authorize ifAllGranted="ROLE_ADMIN">
+			<li class="sub-menu"><a href="index.html"> <i
+					class="fa fa-cogs"></i> <span>系统管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="user">账户管理</a></li>
+					<li><a href="javascript:;" id="roles">角色管理</a></li>
+					<li><a href="javascript:;" id="privilege">权限管理</a></li>
+					<li><a href="javascript:;" id="resource">资源管理</a></li>
+					<li><a href="javascript:;" id="sysLogin">系统日志管理</a></li>
+				</ul></li>
+			</sec:authorize>
+			
+			<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-book"></i> <span>职工信息管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="deptinfo">部门信息管理</a></li>
+					<li><a href="javascript:;" id="teachStaffInfo">教职工基本信息管理</a></li>
+					<li><a href="javascript:;" id="teachStaffEnlargeInfo">教职工扩展信息管理</a></li>
+				</ul></li>
+
+
+
+		<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-align-justify"></i> <span>系统新闻管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="news">新闻管理</a></li>
+					<li><a href="javascript:;" id="newstype">新闻类型管理</a></li>
+				</ul></li>
+		
+
+
+
+
+
+			<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa  fa-flag"></i> <span>培训信息管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="addTrainInfo">发布培训信息</a></li>
+					<li><a href="javascript:;" id="getTrainInfoAll">查询教工培训信息</a></li>
+					<li><a href="javascript:;" id="trainType">培训类别管理</a></li>
+				</ul></li>
+
+			<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-tasks"></i> <span>培训申请管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="mytrainApply">我的申请记录</a></li>
+					<li><a href="javascript:;" id="trainApply_1">个人申请培训</a></li>
+					<li><a href="javascript:;" id="trainApply_0">委派培训项目</a></li>
+					<li><a href="javascript:;" id="auditingOpinion">审核意见管理</a></li>
+					<li><a href="javascript:;" id="procedure">流程管理</a></li>
+				</ul></li>
+
+			<!--  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-tasks"></i>
+                          <span>培训管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="calendar.html">培训信息发布</a></li>
+                          <li><a  href="gallery.html">查看培训信息</a></li>
+                          <li><a  href="todo_list.html">培训流程管理</a></li>
+                          <li><a  href="todo_list.html">培训类别管理</a></li>
+                          <li><a  href="todo_list.html">个人申请培训</a></li>
+                          <li><a  href="todo_list.html">部门申请培训</a></li>
+                          <li><a  href="todo_list.html">直接委派培训</a></li>
+                          <li><a  href="todo_list.html">审核培训申请</a></li>
+                          <li><a  href="todo_list.html">我的申请查询</a></li>
+                          <li><a  href="todo_list.html">部门申请查询</a></li>
+                          <li><a  href="todo_list.html">委派申请查询</a></li>
+                      </ul>
+                  </li> -->
+			<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-th"></i> <span>培训评价管理</span>
+			</a>
+				<ul class="sub">
+					<li><a href="javascript:;" id="addlongPeriodEstimateIndex">长期评价</a></li>
+					<li><a href="javascript:;" id="addshortPeriodEstimateIndex">短期评价</a></li>
+					<li><a href="javascript:;" id="getshortPeriodEstimateAll">查询短期评价结果</a></li>
+					<li><a href="javascript:;" id="getlongPeriodEstimateAll">查询长期评价结果</a></li>
+				</ul></li>
+			<!-- <li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-bar-chart-o"></i> <span>数据统计</span>
+			</a>
+				<ul class="sub">
+					<li><a href="form_component.html">职工信息</a></li>
+					<li><a href="form_component.html">培训信息</a></li>
+				</ul></li> -->
+
+		</ul>
+		<!-- sidebar menu end-->
+	</div>
+</body>
+<script src="<%=path%>/sctbc/assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="<%=path%>/sctbc/js/Index/left.js"></script>
+<script type="text/javascript"
+	src="<%=path%>/sctbc/js/Index/left_budle.js"></script>
+</html>

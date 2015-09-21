@@ -1,0 +1,73 @@
+package com.sctbc.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.sctbc.entity.Trainapply;
+import com.sctbc.entity.Traininfo;
+import com.sctbc.entity.User;
+
+@Repository
+public class TrainapplyDao extends BaseDao {
+
+	@Autowired
+	HibernateTemplate hibernateTemplate;
+
+	boolean result = true;
+
+	public Trainapply getTrainapplyById(int id)
+	{
+		return hibernateTemplate.get(Trainapply.class, id);
+	}
+	public List<Trainapply> getTrainapplyBytraininfoAndUser(
+			Traininfo traininfo, User user) {
+		String hql = "from Trainapply where traininfo=? and user=?";
+		return hibernateTemplate.find(hql, traininfo, user);
+
+	}
+
+	public List<Trainapply> getTrainapplyAll() {
+		String hql = "from Trainapply";
+		return hibernateTemplate.find(hql);
+	}
+
+	public List<Trainapply> getSelfTrainapply(User user) {
+		String hql = "from Trainapply where user=?";
+		return hibernateTemplate.find(hql,user);
+	}
+
+	public List<Trainapply> getTrainapplyByCheck(){
+		String hql = "from Trainapply where finalCheck='通过'";
+		return hibernateTemplate.find(hql);
+	}
+
+	public boolean insertTrainapply(Trainapply trainapply) {
+		try {
+			hibernateTemplate.save(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean updateTrainapply(Trainapply trainapply) {
+		try {
+			hibernateTemplate.update(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+	public boolean delTrainapply(int trainapplyId) {
+		Trainapply trainapply = hibernateTemplate.get(Trainapply.class,
+				trainapplyId);
+		try {
+			hibernateTemplate.delete(trainapply);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+}

@@ -1,0 +1,162 @@
+package com.sctbc.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_TrainInfo;
+import com.sctbc.entity.Deptinfo;
+import com.sctbc.entity.Trainapply;
+import com.sctbc.entity.Traininfo;
+import com.sctbc.entity.Traintype;
+import com.sctbc.entity.User;
+import com.sctbc.server_i.IDeptInfo;
+import com.sctbc.server_i.ITrainApply;
+import com.sctbc.server_i.ITrainInfo;
+import com.sctbc.server_i.ITrainType;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_TRAININFO_MODULE)
+public class TrainInfoController {
+	private static final String LISTPATH = "/sctbc/Page/trainInfo/list";
+	private static final String ADDPATH = "/sctbc/Page/trainInfo/add";
+	private static final String EDITPATH = "/sctbc/Page/trainInfo/edit";
+	private static final String ONEPATH = "/sctbc/Page/trainInfo/one";
+	private static final String TJPATH = "/sctbc/Page/tj/tj";
+	private static final String ENTITYNAME = "Traininfo";
+	private static final String APPLYENTITYNAME = "Trainapply";
+
+	private final boolean result = true;
+
+	@Autowired
+	IDeptInfo iDeptInfo;
+	@Autowired
+	ITrainType iTrainType;
+	@Autowired
+	ITrainInfo iTrainInfo;
+	@Autowired
+	ITrainApply iTrainApply;
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_GETTRAININFOALL)
+	public String getTrainInfoAll(Model model, Integer page, String searchname) {
+
+		int count = iTrainType.getCountTraintype(ENTITYNAME);
+		if (page == null || page.SIZE < 1) {
+			page = 1;
+		} else if (page > count / 6) {
+			page = count / 6 + 1;
+		}
+		List<Traininfo> trainInfoList = iTrainInfo.getListFoPageTraininfo(
+				ENTITYNAME, page, searchname);
+		model.addAttribute("nowpage", page);
+		model.addAttribute("count", count);
+
+		model.addAttribute("trainInfoList", trainInfoList);
+		return LISTPATH;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_ADDTEAININFO)
+	public String addTrainInfo(Model model, Traininfo trainInfo,
+			int trainkindId, int releaseDep) {
+
+		Traintype trainType = iTrainType.getTraintypeById(trainkindId);
+		Deptinfo deptInfo = iDeptInfo.getById(releaseDep);
+
+		trainInfo.setTraintype(trainType);
+		trainInfo.setDeptinfo(deptInfo);
+		boolean result = iTrainInfo.addTraininfo(trainInfo);
+
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_EDITTRAININFO)
+	public String editTrainInfo() {
+		return result + "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_DELTRAININFO)
+	public String delTrainInfo() {
+		return result + "";
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_ADDTRAININFOINDEX)
+	public String addTrainInfoIndex(Model model) {
+		List<Deptinfo> deptInfoList = iDeptInfo.getList();
+		List<Traintype> trainTypeList = iTrainType.getTrainTypeList();
+
+		model.addAttribute("deptInfolist", deptInfoList);
+		model.addAttribute("trainTypelist", trainTypeList);
+
+		return ADDPATH;
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_EDITTRAININFOINDEX)
+	public String editTrainInfoIndex() {
+		return EDITPATH;
+	}
+
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_SEETRAININFOBYONE)
+	public String seeTrainInfoByOne(Model model, int id) {
+		Traininfo trainInfo = iTrainInfo.getTraininfoById(id);
+		model.addAttribute("trainInfo", trainInfo);
+		return ONEPATH;
+	}
+
+	// 统计
+	@RequestMapping(value = Common_TrainInfo.TRAININFO_TRAININFOTJ)
+	public String traininfoTJ(Model model, HttpSession session, Integer page,
+			String projectname, String teachername, String applydeptname,
+			String applyKind, String applytime) throws Exception {
+		if (applydeptname == null) {
+			applydeptname = "";
+		}
+		String where = " as a where a.traininfo.projectName like '%"
+				+ projectname + "%' and a.traininfo.deptinfo.depName like '%"
+				+ applydeptname + "%' and a.applyKind like '%" + applyKind
+				+ "%' ";
+		if (applytime != null && applytime != "") {
+			System.out.println("applytime:" + applytime);
+			SimpleDateFormat format = new SimpleDateFormat(
+"yyyy-MM-dd");
+			Date date = format.parse(applytime);
+			where += " and a.applyDate>=" + date.getTime();
+		}
+		User loginuser = (User) session.getAttribute("USER");
+
+		int userlevel = 1;// 1：部门领导；2：学校领导；
+
+		List<Trainapply> trainApplyList = null;
+
+		List<Deptinfo> deptInfoList = iDeptInfo.getDeptinfoByLeader(loginuser
+				.getUserId());
+
+		if (deptInfoList.size() != 0) {
+			where += "a.traininfo.deptinfo.depName like '%"
+					+ deptInfoList.get(0).getDepName() + "%'";
+			trainApplyList = iTrainApply.getListFoPageTrainapply_TJ(
+					APPLYENTITYNAME,
+					page, where);
+		} else {
+			userlevel = 2;
+			trainApplyList = iTrainApply.getListFoPageTrainapply_TJ(
+					APPLYENTITYNAME,
+					page, where);
+		}
+		model.addAttribute("userlevel", userlevel);
+		model.addAttribute("trainInfoList", trainApplyList);
+		return TJPATH;
+	}
+
+}

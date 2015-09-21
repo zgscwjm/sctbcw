@@ -14,7 +14,7 @@
             <column name="projectID" not-null="true" />
         </many-to-one>
         <many-to-one name="user" class="com.sctbc.entity.User" fetch="select">
-            <column name="userID" length="10" not-null="true" />
+            <column name="userID" length="12" not-null="true" />
         </many-to-one>
         <property name="serveTime" type="java.lang.String">
             <column name="serveTime" length="11" not-null="true" />

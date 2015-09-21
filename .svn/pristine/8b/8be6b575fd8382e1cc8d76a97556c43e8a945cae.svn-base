@@ -1,0 +1,12 @@
+package com.sctbc.server_i;
+
+import java.util.List;
+
+import com.sctbc.entity.Longperiodestimate;
+
+public interface ILongperiodestimate extends IBaseServer<Longperiodestimate> {
+	public boolean addLongperiodestimate(
+Longperiodestimate longperiodestimate);
+	public List<Longperiodestimate> getLongPeriodEstimateBytrainUserID(
+			String userId);
+}

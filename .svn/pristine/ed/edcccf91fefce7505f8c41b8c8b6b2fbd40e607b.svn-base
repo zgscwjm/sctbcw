@@ -1,0 +1,17 @@
+package com.sctbc.server_i;
+
+import java.util.List;
+
+import com.sctbc.entity.Trainapply;
+import com.sctbc.entity.User;
+
+public interface ITrainApply extends IBaseServer<Trainapply> {
+
+
+	public boolean addTrainApply(Trainapply trainapply);
+	public List<Trainapply> getTrainapplyByCheck(String userId);
+
+	
+	public List<Trainapply> getTrainListByUser(User user);
+
+}

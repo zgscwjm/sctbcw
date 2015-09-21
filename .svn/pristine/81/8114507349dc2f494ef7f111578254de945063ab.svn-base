@@ -1,0 +1,108 @@
+function TrainInfo() {
+}
+TrainInfo.prototype = {
+	addIndex : function(path) {
+		window.location.href = path + "/TrainInfo/addTrainInfoIndex";
+	},
+	editIndex : function(path) {
+		window.location.href = path + "/TrainInfo/editTrainInfoIndex";
+	},
+	seeByOne:function(id,path){
+		window.location.href=path+"/TrainInfo/seeTrainInfoByOne?id="+id;
+	},
+	sq:function(projectid,path){
+		window.location.href=path+"/TrainApply/addTrainApplyIndex?type=1&projectid="+projectid;
+	},
+	add : function(releaseDep, projectID, projectName, trainYear,
+			trainStartTime, trainEndTime, trainWay, trainCategory,
+			numberOfPeople, trainPlace, trainContent, trainPerson,
+			trainResult, borrowTime, borrowBalance, rbAmountTime,
+			rbAmount, costCompensated, memo,path) {
+		$.ajax({
+			cache : true,
+			type : "post",
+			url : path + "/TrainInfo/addTrainInfo",
+			data : {
+				releaseDep:releaseDep, projectID:projectID, projectName:projectName, trainYear:trainYear,
+				trainStartTime:trainStartTime, trainEndTime:trainEndTime, trainWay:trainWay, trainkindId:trainCategory,
+				numberOfPeople:numberOfPeople, trainPlace:trainPlace, trainContent:trainContent, trainPerson:trainPerson,
+				trainResult:trainResult, borrowTime:borrowTime, borrowBalance:borrowBalance, rbAmountTime:rbAmountTime,
+				rbAmount:rbAmount, costCompensated:costCompensated, memo:memo
+			},
+			async : false,
+			error : function(request) {
+				alert("Connection error");
+			},
+			success : function(data) {
+				if (data) {
+					alert("操作成功！页面将自动跳转…………");
+					setTimeout(function() {
+						window.location.href = path
+								+ "/TrainInfo/getTrainInfoAll"
+					}, "1000");
+				} else {
+					alert("操作失败！");
+				}
+			}
+		});
+	},
+	edit : function(path) {
+		$.ajax({
+			cache : true,
+			type : "post",
+			url : path + "/TrainInfo/editTrainInfo",
+			data : $('#edit_form').serialize(),
+			async : false,
+			error : function(request) {
+				alert("Connection error");
+			},
+			success : function(data) {
+				if (data) {
+					alert("操作成功！页面将自动跳转…………");
+					setTimeout(function() {
+						window.location.href = path
+								+ "/TrainInfo/getTrainInfoAll"
+					}, "1000");
+				} else {
+					alert("操作失败！");
+				}
+			}
+		});
+	},
+	del : function(id, path) {
+		$.ajax({
+			type : "get",
+			url : path + "/TrainInfo/delTrainInfo",
+			data : {
+				id : id
+			},
+			error : function(request) {
+				alert("Connection error");
+			},
+			success : function(data) {
+				if (data) {
+					alert("操作成功！页面将自动跳转…………");
+					setTimeout(function() {
+						window.location.href = path
+								+ "/TrainInfo/getTrainInfoAll"
+					}, "1000");
+				} else {
+					alert("操作失败！");
+				}
+			}
+		});
+	},
+	upload : function(path) {
+		$("#upload_form").ajaxSubmit({
+            success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                $("#trainResult").val(data);
+            }
+		});
+	},
+	list:function(page,path){
+		window.location.href=path+"/TrainInfo/getTrainInfoAll?page="+page;
+	},
+	search:function(searchname,path){
+		window.location.href=path+"/TrainInfo/getTrainInfoAll?searchname="+searchname;
+	}
+}

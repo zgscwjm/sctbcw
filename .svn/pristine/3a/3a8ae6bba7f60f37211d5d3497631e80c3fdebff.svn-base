@@ -1,0 +1,70 @@
+package com.sctbc.servers_impl;
+
+import java.sql.Timestamp;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sctbc.dao.SysloginDao;
+import com.sctbc.entity.Syslogin;
+import com.sctbc.server_i.ISysLogServer;
+
+
+@Service
+public class SysLogServer implements ISysLogServer {
+
+
+	@Autowired
+	SysloginDao sysloginDao;
+
+	@Override
+	public Syslogin getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Syslogin> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delById(int id) {
+		// TODO Auto-generated method stub
+		return sysloginDao.delSyslogin(id);
+	}
+
+	@Override
+	public boolean upData(Syslogin t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Syslogin> getListFoPage(String EntityName, Integer nowpage,
+			String searchname) {
+		// TODO Auto-generated method stub
+		String where = "";
+		return sysloginDao.getListFoPage(EntityName, nowpage, where);
+	}
+
+	@Override
+	public Integer getCount(String EntityName) {
+		// TODO Auto-generated method stub
+		return sysloginDao.getCount(EntityName);
+	}
+
+	@Override
+	public boolean addSysLog(String userid, String ip) {
+		// TODO Auto-generated method stub
+		Syslogin syslogin=new Syslogin();
+		syslogin.setLoginIp(ip);
+		syslogin.setUserId(userid);
+		syslogin.setLoginTime(new Timestamp(System.currentTimeMillis()));
+		sysloginDao.insertSyslogin(syslogin);
+		return false;
+	}
+
+}

@@ -1,0 +1,94 @@
+function Left() {
+}
+Left.prototype = {
+		index:function(path){
+			window.location.href=path+"/Index/index";
+		},
+	//系统管理
+	user : function(path) {
+		window.location.href = path + "/User/getUserAll";
+	},
+	roles:function(path){
+		window.location.href = path +"/Roles/getRolesAll";
+	},
+	privilege:function(path){
+		window.location.href=path+"/Privilege/getPrivilegeAll";
+	},
+	news:function(path){
+		window.location.href=path+"/News/getNewsAll";
+	},
+	newstype:function(path){
+		window.location.href=path+"/NewsType/getNewsTypeAll";
+	},
+	resource:function(path){
+		window.location.href=path+"/Resource/getResourceAll";
+	},
+	sysLogin:function(path){
+		window.location.href=path+"/SysLogin/getSysLoginAll";
+	},
+	
+	
+	//***************************************************************************
+	//职工信息管理
+	deptinfo : function(path) {
+		window.location.href = path + "/DeptInfo/getDeptInfoAll";
+	},
+	teachStaffInfo : function(path) {
+		window.location.href = path + "/TeachStaffInfo/getTeachStaffInfoAll";
+	},
+	teachStaffEnlargeInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffEnlargeInfo/getTeachStaffEnlargeInfoAll";
+	},
+	
+	
+	
+	
+	//***************************************************************************
+	//培训信息管理
+	
+	mytrainApply:function(path)
+	{
+		window.location.href=path+"/TrainApply/getTrainApplyAll";
+	},
+	addTrainInfo:function(path){
+		window.location.href=path+"/TrainInfo/addTrainInfoIndex";
+	},
+	getTrainInfoAll:function(path){
+		window.location.href=path+"/TrainInfo/getTrainInfoAll";
+	},
+	teachStaffTrainInfo : function(path) {
+		window.location.href = path
+				+ "/TeachStaffTrainInfo/getTeachStaffTrainInfoAll";
+	},
+	trainInfo : function(path) {
+		window.location.href = path + "/TrainInfo/getTrainInfoAll";
+	},
+	trainType : function(path) {
+		window.location.href = path + "/TrainType/getTrainTypeAll";
+	},
+	addtrainApplyIndex : function(type,path) {
+			window.location.href = path + "/TrainApply/addTrainApplyIndex?type="+type;
+	},
+	auditingOpinion : function(path) {
+		window.location.href = path + "/AuditingOpinion/getAuditingOpinionAll";
+	},
+	addshortPeriodEstimateIndex : function(path) {
+		window.location.href = path
+				+ "/ShortPeriodEstimate/addShortPeriodEstimateIndex";
+	},
+	addlongPeriodEstimateIndex : function(path) {
+		window.location.href = path
+				+ "/LongPeriodEstimate/addLongPeriodEstimateIndex";
+	},
+	getshortPeriodEstimateAll:function(path){
+		window.location.href=path+"/ShortPeriodEstimate/getShortPeriodEstimateAll";
+	},
+	getlongPeriodEstimateAll:function(path){
+		window.location.href=path+"/LongPeriodEstimate/getLongPeriodEstimateAll";
+	},
+	procedure:function(path){
+		window.location.href = path
+		+ "/Procedure/getProcedureAll";
+	}
+}

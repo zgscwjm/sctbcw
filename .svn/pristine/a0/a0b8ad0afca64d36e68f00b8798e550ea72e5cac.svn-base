@@ -1,0 +1,12 @@
+package com.sctbc.server_i;
+
+import java.util.List;
+
+import com.sctbc.entity.Shortperiodestimate;
+
+public interface IShortPeriodEstimate extends IBaseServer<Shortperiodestimate> {
+	public boolean addShortPeriodEstimate(
+			Shortperiodestimate shortPeriodEstimate);
+	public List<Shortperiodestimate> getShortperiodestimateBytrainUserID(
+			String userid);
+}

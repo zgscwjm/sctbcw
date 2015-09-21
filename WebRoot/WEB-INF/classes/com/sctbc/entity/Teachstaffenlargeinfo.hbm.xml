@@ -7,13 +7,13 @@
 <hibernate-mapping>
     <class name="com.sctbc.entity.Teachstaffenlargeinfo" table="teachstaffenlargeinfo" catalog="trainmanagementinfomationsystem">
         <id name="userId" type="java.lang.String">
-            <column name="userID" length="10" />
+            <column name="userID" length="12" />
             <generator class="assigned" />
         </id>
         <many-to-one name="deptinfo" class="com.sctbc.entity.Deptinfo" fetch="select" lazy="false">
             <column name="depID" not-null="true" />
         </many-to-one>
-        <one-to-one name="user" class="com.sctbc.entity.User" constrained="true"></one-to-one>
+        <one-to-one name="user" class="com.sctbc.entity.User" constrained="true" lazy="false"></one-to-one>
         <property name="idnumber" type="java.lang.String">
             <column name="IDNumber" length="18" not-null="true" />
         </property>

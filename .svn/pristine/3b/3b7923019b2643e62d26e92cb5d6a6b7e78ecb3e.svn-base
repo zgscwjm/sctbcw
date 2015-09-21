@@ -1,0 +1,23 @@
+package com.sctbc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sctbc.constant.Common_Base;
+import com.sctbc.constant.Common_Procedure;
+
+@Controller
+@RequestMapping(Common_Base.COMMON_PROCEDURE_MODULE)
+public class ProcedureController {
+	public static final String LISTPATH = "/sctbc/Page/procedure/list";
+	public static final String ADDPATH = "/sctbc/Page/procedure/add";
+
+	@RequestMapping(value = Common_Procedure.PROCEDURE_GETPROCEDUREALL)
+	public String getProcedureAll() {
+		return LISTPATH;
+	}
+	@RequestMapping(value = Common_Procedure.PROCEDURE_ADDPROCEDUREINDEX)
+	public String addProcedureIndex() {
+		return ADDPATH;
+	}
+}
